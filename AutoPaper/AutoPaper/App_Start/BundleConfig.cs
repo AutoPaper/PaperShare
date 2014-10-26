@@ -25,7 +25,9 @@ namespace AutoPaper
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css",
+                      "~/Content/buttons.css",
+                      "~/Content/mystyle.css"));
         }
     }
 }
