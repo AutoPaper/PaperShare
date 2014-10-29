@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
-<head lang="zh-cn">
+<head lang="zh-CN">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,29 +16,27 @@
                 @Html.ActionLink("卷库网", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <ul class="nav navbar-nav">
-                <li><p style="font-size: 20px; color: #32cd32; font-family: Consolas; margin-top: 10px; ">papershare.cn</p></li>
+                <li><p style="font-size: 20px; color: #32cd32; font-family: Consolas; margin-top: 10px;">papershare.cn</p></li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="教师或试卷的信息">
+                    <button type="submit" class="button button-flat-primary">搜 索</button>
                 </div>
-                <button type="submit" class="button button-flat-primary">搜 索</button>
             </form>
-                <div>
-                    @Html.Partial("_LoginPartial")
-                </div>
-</div>
+            <div>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
     </div>
-    <div style="height: 7px; width: 100%; background-color: #32cd32; "></div>
     <div class="container body-content">
         @RenderBody()
     </div>
-    <footer class="navbar-fixed-bottom">
-        <hr />
+    <footer style="background-color: #f7f7f7; padding-top: 10px; padding-bottom: 10px; ">
         <p id="copyright">Copyright &copy; @DateTime.Now.Year - @(DateTime.Now.Year + 1) papershare.cn , All Rights Reserved</p>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
+  @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

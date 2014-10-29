@@ -1,4 +1,6 @@
-﻿a.navbar-brand {
+﻿@charset"utf-8";
+
+a.navbar-brand {
     font-size: 40px;
     font-family: 汉仪综艺体简,汉仪粗黑简,汉仪仿宋简;
 }
@@ -6,4 +8,5 @@
 p#copyright {
     text-align: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
