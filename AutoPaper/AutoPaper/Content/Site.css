@@ -41,3 +41,7 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+.nav-pills > li > a:hover {
+    font-family: 汉仪综艺体简,汉仪粗黑简,汉仪仿宋简;
+}

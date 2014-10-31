@@ -3693,20 +3693,24 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-pills > li {
   float: none;
 }
-    .nav-pills > li > a {
-        font-size: 16px;
-        color: #b1b1b1;
-        width: 100%;
-        border-radius: 0px;
-    }
+.nav-pills > li > a {
+    font-size: 16px;
+    color: #b1b1b1;
+    width: 100%;
+    border-radius: 0px;
+}
 .nav-pills > li + li {
   float: none;
 }
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:hover,
 .nav-pills > li.active > a:focus {
-  color: #32cd32;
-  background-color: #7FE77F;
+  color: #ffffff;
+  background-color: #32cd32;
+}
+.nav-pills > li > a:hover {
+    font-size: 18px;
+    color: #32cd32;
 }
 .nav-stacked > li {
   float: none;
