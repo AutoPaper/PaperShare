@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 namespace AutoPaper.Models
@@ -11,12 +13,16 @@ namespace AutoPaper.Models
         public int ID { get; set; }
         public string keyhash { get; set; }
         public string name { get; set; }
-        public int authroity { get; set; }
+        public int authority { get; set; }
         public string picAddr { get; set; }
     }
     public class follow
     {
+        [Key]
+        [Column(Order = 0)]
         public int userID { get; set; }
+        [Key]
+        [Column(Order = 1)]
         public int followID { get; set; }
     }
     public class papers
@@ -33,7 +39,11 @@ namespace AutoPaper.Models
     }
     public class PU
     {
+        [Key]
+        [Column(Order = 0)]
         public int userID { get; set; }
+        [Key]
+        [Column(Order = 1)]
         public int paperID { get; set; }
         public bool hasSHA { get; set; }
         public string logAddr { get; set; }
@@ -43,20 +53,26 @@ namespace AutoPaper.Models
     }
     public class PT
     {
-        public int teacherID { get; set; }
+        [Key]
         public int paperID { get; set; }
+        public int teacherID { get; set; }
         public DateTime createTime { get; set; }
         public int doneCount { get; set; }
     }
     public class knowledgeTree
     {
+        [Key]
+        public int ID { get; set; }
         public string knowledge { get; set; }
-        public int treeIndex { get; set; }
-        public int parent { get; set; }
+        public int parentID { get; set; }
     }
     public class PK
     {
+        [Key]
+        [Column(Order = 0)]
         public string knowledge { get; set; }
+        [Key]
+        [Column(Order = 1)]
         public int paperID { get; set; }
     }
     public class question
@@ -69,7 +85,11 @@ namespace AutoPaper.Models
     }
     public class QK
     {
+        [Key]
+        [Column(Order = 0)]
         public string knowledge { get; set; }
+        [Key]
+        [Column(Order = 1)]
         public int questionID { get; set; }
     }
     public class PaperShareDBContext : DbContext

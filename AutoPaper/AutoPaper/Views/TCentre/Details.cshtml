@@ -1,0 +1,51 @@
+﻿@model AutoPaper.Models.users
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>users</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.keyhash)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.keyhash)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.authroity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.authroity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.picAddr)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.picAddr)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
