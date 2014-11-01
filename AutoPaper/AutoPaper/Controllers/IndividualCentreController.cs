@@ -10,17 +10,17 @@ using AutoPaper.Models;
 
 namespace AutoPaper.Controllers
 {
-    public class TCentreController : Controller
+    public class IndividualCentreController : Controller
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
-        // GET: /TCentre/
+        // GET: /IndividualCentre/
         public ActionResult Index()
         {
             return View(db.user_table.ToList());
         }
 
-        // GET: /TCentre/Details/5
+        // GET: /IndividualCentre/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +35,18 @@ namespace AutoPaper.Controllers
             return View(users);
         }
 
-        // GET: /TCentre/Create
+        // GET: /IndividualCentre/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: /TCentre/Create
+        // POST: /IndividualCentre/Create
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include="ID,keyhash,name,authroity,picAddr")] users users)
+        public ActionResult Create([Bind(Include="ID,keyhash,name,authority,picAddr")] users users)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace AutoPaper.Controllers
             return View(users);
         }
 
-        // GET: /TCentre/Edit/5
+        // GET: /IndividualCentre/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,12 +73,12 @@ namespace AutoPaper.Controllers
             return View(users);
         }
 
-        // POST: /TCentre/Edit/5
+        // POST: /IndividualCentre/Edit/5
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include="ID,keyhash,name,authroity,picAddr")] users users)
+        public ActionResult Edit([Bind(Include="ID,keyhash,name,authority,picAddr")] users users)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace AutoPaper.Controllers
             return View(users);
         }
 
-        // GET: /TCentre/Delete/5
+        // GET: /IndividualCentre/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace AutoPaper.Controllers
             return View(users);
         }
 
-        // POST: /TCentre/Delete/5
+        // POST: /IndividualCentre/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

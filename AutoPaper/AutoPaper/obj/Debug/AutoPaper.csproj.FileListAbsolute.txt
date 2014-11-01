@@ -4,3 +4,9 @@ F:\南京师范大学\计算机学院\软件工程\Code\AutoPaper\AutoPaper\bin\
 F:\南京师范大学\计算机学院\软件工程\Code\AutoPaper\AutoPaper\bin\EntityFramework.xml
 F:\南京师范大学\计算机学院\软件工程\Code\AutoPaper\AutoPaper\obj\Debug\AutoPaper.dll
 F:\南京师范大学\计算机学院\软件工程\Code\AutoPaper\AutoPaper\obj\Debug\AutoPaper.pdb
+F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\AutoPaper.dll.config
+F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\AutoPaper.dll
+F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\AutoPaper.pdb
+F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.csprojResolveAssemblyReference.cache
+F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.dll
+F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.pdb

@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
-<head lang="zh-CN">
+<head lang="zh-cn">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,9 +24,9 @@
                     <button type="submit" class="button button-flat-primary">搜 索</button>
                 </div>
             </form>
-           @* <div>
-        @Html.Partial("_LoginPartial")
-    </div>*@
+            <div>
+                @Html.Partial("_LoginPartial")
+            </div>
         </div>
     </div>
     <div class="container body-content">
@@ -36,7 +36,7 @@
         <p id="copyright">Copyright &copy; @DateTime.Now.Year - @(DateTime.Now.Year + 1) papershare.cn , All Rights Reserved</p>
     </footer>
 
-  @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

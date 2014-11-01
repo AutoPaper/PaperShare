@@ -158,8 +158,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TCentreController.cs" />
+    <Compile Include="Controllers\IndividualCentreController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -286,11 +287,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\TCentre\Create.cshtml" />
-    <Content Include="Views\TCentre\Delete.cshtml" />
-    <Content Include="Views\TCentre\Details.cshtml" />
-    <Content Include="Views\TCentre\Edit.cshtml" />
-    <Content Include="Views\TCentre\Index.cshtml" />
+    <Content Include="Views\IndividualCentre\Create.cshtml" />
+    <Content Include="Views\IndividualCentre\Delete.cshtml" />
+    <Content Include="Views\IndividualCentre\Details.cshtml" />
+    <Content Include="Views\IndividualCentre\Edit.cshtml" />
+    <Content Include="Views\IndividualCentre\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
