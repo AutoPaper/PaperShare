@@ -21,7 +21,7 @@
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" placeholder="教师或试卷的信息">
-                    <button type="submit" class="button button-flat-primary">搜 索</button>
+                    <button type="submit" class="button button-flat-primary" style="margin-left: -5px;">搜 索</button>
                 </div>
             </form>
             <div>
@@ -31,6 +31,42 @@
     </div>
     <div class="container body-content">
         @RenderBody()
+    </div>
+    <div style="position: fixed; left: 35%; top: 20%; width: 30%; background-color: #c8efc8; ">
+        <div class="container-fluid" style="padding-top: 50px; padding-bottom: 50px;">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <input type="email" class="form-control" placeholder="请输入登陆邮箱">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <input type="password" class="form-control" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-4">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox">自动登录
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-3 col-sm-3" style="padding-top: 7px; padding-left: 5px; ">
+                        <a>忘记密码？</a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-4">
+                        <button type="submit" class="button button-flat-primary">登 录</button>
+                    </div>
+                    <div class="col-sm-offset-2 col-sm-4">
+                        <button class="button button-flat-highlight" style="margin-left: 9px;">取 消</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <footer style="background-color: #f7f7f7; padding-top: 10px; padding-bottom: 10px; ">
         <p id="copyright">Copyright &copy; @DateTime.Now.Year - @(DateTime.Now.Year + 1) papershare.cn , All Rights Reserved</p>
