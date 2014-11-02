@@ -1,0 +1,38 @@
+﻿<div id="_register" style="display: none; position: fixed; left: 35%; top: 20%; width: 30%; background-color: #c8efc8; ">
+    <div class="container-fluid" style="padding-top: 50px; padding-bottom: 50px;">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                    <input type="email" class="form-control" placeholder="请输入登陆邮箱">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                    <input type="password" class="form-control" placeholder="请输入密码">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-10">
+                    <input type="text" class="form-control" placeholder="请输入称谓(教师建议用真实姓名)">
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="col-sm-offset-1 col-sm-4">用户类型：</p>
+                <label class="radio-inline col-sm-3" style="padding-top: 0px;">
+                    <input type="radio" name="userType" id="radio1" value="学生"> 学生
+                </label>
+                <label class="radio-inline col-sm-3" style="padding-top: 0px;">
+                    <input type="radio" name="userType" id="radio2" value="教师"> 教师
+                </label>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-1 col-sm-4">
+                    <button type="submit" class="button button-flat-highlight">注 册</button>
+                </div>
+                <div class="col-sm-offset-2 col-sm-4">
+                    <a class="button button-flat-primary" style="margin-left: 9px; cursor: pointer;" onclick="onlyShowLogin()">登 陆</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -10,7 +10,8 @@ namespace AutoPaper
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/buttons.js"));
+                        "~/Scripts/buttons.js",
+                        "~/Scripts/jquery.lightbox.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));

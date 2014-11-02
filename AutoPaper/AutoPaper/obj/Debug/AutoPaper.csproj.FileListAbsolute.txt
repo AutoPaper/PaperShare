@@ -7,7 +7,6 @@ F:\南京师范大学\计算机学院\软件工程\Code\AutoPaper\AutoPaper\obj\
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\AutoPaper.dll.config
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\AutoPaper.dll
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\AutoPaper.pdb
-F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.csprojResolveAssemblyReference.cache
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.dll
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.pdb
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\Antlr3.Runtime.dll
@@ -78,3 +77,4 @@ F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\Aut
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\zh-Hans\Microsoft.Owin.Security.Google.resources.dll
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\zh-Hans\Microsoft.Owin.Security.Twitter.resources.dll
 F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\bin\zh-Hans\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.csprojResolveAssemblyReference.cache
