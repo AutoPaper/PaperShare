@@ -45,3 +45,20 @@ input[type="checkbox"].input-validation-error {
 .nav-pills > li > a:hover {
     font-family: 汉仪综艺体简,汉仪粗黑简,汉仪仿宋简;
 }
+
+.hot-recommend > a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #8e8e8e;
+}
+
+.hot-recommend > a:link,
+.hot-recommend > a:visited {
+    color: #8e8e8e;
+}
+
+.hot-recommend > a:hover,
+.hot-recommend > a:active,
+.hot-recommend > .active {
+    color: #32cd32;
+}

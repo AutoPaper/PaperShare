@@ -4,8 +4,8 @@
 
 <div style="width: 25%; height: 100%; float: left; color:transparent">.</div>
 <div style="position: fixed; text-align: center; width: 20%; background-color: #f7f7f7; height: auto; ">
-    <h3 style="font-family: 汉仪综艺体简,汉仪粗黑简,汉仪仿宋简; color: #32cd32; opacity: 0.75">试卷筛选</h3>
-    <hr style="margin-bottom: 0px; "/>
+    <h3 style="font-family: 汉仪综艺体简,汉仪仿宋简; color: #32cd32; opacity: 0.75">试卷筛选</h3>
+    <hr style="margin-bottom: 0px; " />
     <ul class="nav nav-pills">
         <li><a href="#">人气高低</a></li>
         <li><a href="#">质量评分高低</a></li>
@@ -14,8 +14,28 @@
     </ul>
 </div>
 <div style="float: left; width: 75%; height: auto; padding-left: 4%">
-    <ul class="nav nav-tabs nav-justified" role="tablist">
-        <li class="active"><a href="#">热门教师</a></li>
-        <li><a href="#">热门试卷</a></li>
-    </ul> 
+    <div class="hot-recommend">
+        <a id="hot-paper" class="active col-md-6" style="text-align: center; " onclick="barToPaper()">
+            <h3 style="font-family: 微软雅黑,汉仪仿宋简; ">热门试卷</h3>
+        </a>
+        <a id="hot-teacher" class="col-md-6" style="text-align: center; " onclick="barToTeacher()">
+            <h3 style="font-family: 微软雅黑,汉仪仿宋简; ">热门教师</h3>
+        </a>
+        <div class="container-fluid">
+            <div id="smartbar" class="col-md-6" style=" background-color: #32cd32; height: 4px; "></div>
+            <hr style="padding-top: 0px; margin-top: 4px;" />
+        </div>
+    </div>
 </div>
+<script type="text/javascript">
+    function barToTeacher() {
+        $("#smartbar").addClass("col-md-offset-6");
+        $("#hot-paper").removeClass("active");
+        $("#hot-teacher").addClass("active");
+    }
+    function barToPaper() {
+        $("#smartbar").removeClass("col-md-offset-6");
+        $("#hot-teacher").removeClass("active");
+        $("#hot-paper").addClass("active");
+    }
+</script>
