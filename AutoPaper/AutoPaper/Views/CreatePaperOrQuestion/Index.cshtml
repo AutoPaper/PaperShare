@@ -1,0 +1,56 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "新试卷-卷库网";
+}
+
+<div id="assemble-intro" onmouseover="Mouse_in()" onmouseout="Mouse_out()" onclick="switchToAssemble()" style="cursor: pointer; display: none; position: fixed; width: auto; height: auto; background-color: #f7f7f7; ">
+    <div id="assemble-description" style="position: fixed; display: none; width: 200px; background-color: #c1f0c1; ">
+        <p>海量试题，任由您选择。全面的知识点，丰富的题型，灵活的难度组合，别致的出卷体验！</p>
+    </div>
+    <div style="width: 200px; height: 50px; background-color: #c1f0c1; text-align: center; ">
+        <h3 style="font-family: 微软雅黑; padding-top: 10px; ">组卷系统</h3>
+    </div>
+    <div id="assemble-extend" style="background-color: #f7f7f7; width: 100%; height: auto; ">
+        <img style="margin-left: 50px; opacity: 0.3; " src="~/PicRes/assemble-extend.png" />
+    </div>
+</div>
+<div id="assemble-content" class="col-md-9" style=" height: 400px; padding-left: 4%; background-color: #f7f7f7">
+    assemble-content
+</div>
+<div id="upload-intro" onmouseover="Mouse_in()" onmouseout="Mouse_out()" onclick="switchToUpload()" style="cursor: pointer; position: fixed; right: 11%; width: auto; height: auto; background-color: #f7f7f7; ">
+    <div id="upload-description" style="position: fixed; display: none; width: 200px; background-color: #fccc8a; ">
+        <p>上传您的试卷，将资源与大家共享，加强交流，与名师一同探讨教研经验！</p>
+    </div>
+    <div style="width: 200px; height: 50px; background-color: #fccc8a; text-align: center; ">
+        <h3 style="font-family: 微软雅黑; padding-top: 10px; ">上传试卷</h3>
+    </div>
+    <div id="upload-extend" style="background-color: #f7f7f7; width: 100%; height: auto; ">
+        <img style="margin-left: 50px; opacity: 0.3; " src="~/PicRes/upload-extend.png" />
+    </div>
+</div>
+<div id="upload-content" class="col-md-offset-3 col-md-9" style="display: none; float: right; height: 400px; padding-left: 4%; background-color: #f7f7f7; ">
+    upload-content
+</div>
+<script type="text/javascript">
+    function switchToUpload() {
+        $("#assemble-content").toggle(400);
+        $("#upload-intro").hide();
+        $("#assemble-intro").show(400);
+        $("#upload-content").toggle(400);
+    }
+    function switchToAssemble() {
+        $("#upload-content").toggle(400);
+        $("#assemble-intro").hide();
+        $("#upload-intro").show(400);
+        $("#assemble-content").toggle(400);
+    }
+    function Mouse_in() {
+        $("#assemble-description,#upload-description").show();
+        $("#assemble-extend > img,#upload-extend > img").css("opacity",1);
+    }
+
+    function Mouse_out() {
+        $("#assemble-description,#upload-description").hide();
+        $("#assemble-extend > img,#upload-extend > img").css("opacity", 0.3);
+    }
+</script>

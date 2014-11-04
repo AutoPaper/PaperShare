@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace AutoPaper.Controllers
 {
-    public class PaperCreateController : Controller
+    public class CreatePaperOrQuestionController : Controller
     {
         //
-        // GET: /PaperCreate/
+        // GET: /CreatePaperOrQuestion/
         public ActionResult Index()
         {
             return View();

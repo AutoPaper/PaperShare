@@ -8,7 +8,7 @@
     padding-bottom: 20px;
     padding-left: 8%;
     padding-right: 8%;
-    min-height: 480px;
+    min-height: 464px;
 }
 
 input,
@@ -52,13 +52,13 @@ input[type="checkbox"].input-validation-error {
     color: #8e8e8e;
 }
 
-.hot-recommend > a:link,
-.hot-recommend > a:visited {
-    color: #8e8e8e;
-}
+    .hot-recommend > a:link,
+    .hot-recommend > a:visited {
+        color: #8e8e8e;
+    }
 
-.hot-recommend > a:hover,
-.hot-recommend > a:active,
-.hot-recommend > .active {
-    color: #32cd32;
-}
+    .hot-recommend > a:hover,
+    .hot-recommend > a:active,
+    .hot-recommend > .active {
+        color: #32cd32;
+    }
