@@ -48,7 +48,7 @@ namespace AutoPaper.Models
         public bool hasSHA { get; set; }
         public string logAddr { get; set; }
         public DateTime logTime { get; set; }
-        public string commentAddr { get; set; }
+        public string comment { get; set; }
         public DateTime commentTime { get; set; }
     }
     public class PT
@@ -92,6 +92,16 @@ namespace AutoPaper.Models
         [Column(Order = 1)]
         public int questionID { get; set; }
     }
+    public class selectHistory
+    {
+        [Key]
+        [Column(Order = 0)]
+        public int questionID { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        public int teacherID { get; set; }
+        public DateTime time { get; set; }
+    }
     public class PaperShareDBContext : DbContext
     {
         public DbSet<users> user_table { get; set; }
@@ -103,5 +113,6 @@ namespace AutoPaper.Models
         public DbSet<PK> PK_table { get; set; }
         public DbSet<question> question_table { get; set; }
         public DbSet<QK> QK_table { get; set; }
+        public DbSet<selectHistory> selectHistory_table { get; set; }
     }
 }
