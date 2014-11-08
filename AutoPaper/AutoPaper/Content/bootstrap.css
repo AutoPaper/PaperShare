@@ -250,7 +250,7 @@ th {
     border-top-color: #000 !important;
   }
   .label {
-    border: 1px solid #000;
+    border: 5px solid #000;
   }
   .table {
     border-collapse: collapse !important;
@@ -4474,7 +4474,7 @@ a.label:focus {
   top: -1px;
 }
 .label-default {
-  background-color: #777;
+  background-color: #b0b0b0;
 }
 .label-default[href]:hover,
 .label-default[href]:focus {

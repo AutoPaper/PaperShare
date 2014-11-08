@@ -43,7 +43,7 @@ input[type="checkbox"].input-validation-error {
 }
 
 .nav-pills > li > a:hover {
-    font-family: 汉仪综艺体简,汉仪粗黑简,汉仪仿宋简;
+    font-family: 微软雅黑,汉仪仿宋简;
 }
 
 .hot-recommend > a {
@@ -52,13 +52,94 @@ input[type="checkbox"].input-validation-error {
     color: #8e8e8e;
 }
 
-    .hot-recommend > a:link,
-    .hot-recommend > a:visited {
-        color: #8e8e8e;
-    }
+.hot-recommend > a:link,
+.hot-recommend > a:visited {
+    color: #8e8e8e;
+}
 
-    .hot-recommend > a:hover,
-    .hot-recommend > a:active,
-    .hot-recommend > .active {
-        color: #32cd32;
-    }
+.hot-recommend > a:hover,
+.hot-recommend > a:active,
+.hot-recommend > .active {
+    color: #32cd32;
+}
+
+.btn-extend {
+    float: left;
+    background-color: #b9b9b9;
+    height: 100%;
+    width: 12%;
+    margin-left: 63%;
+    margin-right: 0px;
+    cursor: pointer;
+}
+
+.nav-knowledge-select > li {
+  float: none;
+}
+.nav-knowledge-select > li > a {
+    font-size: 14px;
+    color: #555555;
+    width: 100%;
+    border-radius: 0px;
+    font-family:微软雅黑;
+}
+.nav-knowledge-select > li + li {
+  float: none;
+}
+.nav-knowledge-select > li.active > a,
+.nav-knowledge-select > li.active > a:hover,
+.nav-knowledge-select > li.active > a:focus {
+    background-color: #a0a0a0;
+}
+
+.nav-knowledge-select > li > a:hover {
+    background-color: #bfbfbf;
+}
+
+.assemble-col {
+    position: relative;
+    float: left;
+    width: 92%;
+    margin-left: 4%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.assemble-btn-add {
+    font-family: 微软雅黑;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -moz-transition-property: all;
+    -o-transition-property: all;
+    -webkit-transition-property: all;
+    transition-property: all;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    color: #000000;
+    border: 2px solid #b9b9b9;
+    background: none;
+    text-shadow: none;
+}
+
+  .assemble-btn-add:hover, .assemble-btn-add:focus {
+    background: #b9b9b9;
+    color: #000000;
+    border: 2px solid #b9b9b9; }
+
+  .assemble-btn-add:active, .assemble-btn-add.is-active, .assemble-btn-add.active {
+    -moz-transition-duration: 0s;
+    -o-transition-duration: 0s;
+    -webkit-transition-duration: 0s;
+    transition-duration: 0s;
+    background: none;
+    color: #8e8e8e;
+    border: 2px solid #8e8e8e; }
+
+  .assemble-btn-add.disabled {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-appearance: none; }

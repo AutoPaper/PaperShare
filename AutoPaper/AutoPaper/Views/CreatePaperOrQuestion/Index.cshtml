@@ -5,7 +5,7 @@
 
 <div id="assemble-intro" onmouseover="Mouse_in()" onmouseout="Mouse_out()" onclick="switchToAssemble()" style="cursor: pointer; display: none; position: fixed; width: auto; height: auto; background-color: #f7f7f7; ">
     <div id="assemble-description" style="position: fixed; display: none; width: 200px; background-color: #c1f0c1; ">
-        <p>海量试题，任由您选择。全面的知识点，丰富的题型，灵活的难度组合，别致的出卷体验！</p>
+        <p style="font-family: 微软雅黑;">海量试题，任由您选择。全面的知识点，丰富的题型，灵活的难度组合，别致的出卷体验！</p>
     </div>
     <div style="width: 200px; height: 50px; background-color: #c1f0c1; text-align: center; ">
         <h3 style="font-family: 微软雅黑; padding-top: 10px; ">组卷系统</h3>
@@ -14,12 +14,77 @@
         <img style="margin-left: 50px; opacity: 0.3; " src="~/PicRes/assemble-extend.png" />
     </div>
 </div>
-<div id="assemble-content" class="col-md-9" style=" height: 400px; padding-left: 4%; background-color: #f7f7f7">
-    assemble-content
+<div id="assemble-content" class="col-md-9" style="height: auto; background-color: #f7f7f7; padding-left: 0px; padding-right: 0px; padding-bottom: 80px; ">
+    <div style="width: 300px; height: 75px; background-color: #c1f0c1; text-align: center; margin-top: 20px; margin-left: 0px; ">
+        <h2 style="font-family: 微软雅黑; padding-top: 20px; ">组  卷  系  统</h2>
+    </div>
+    @using (Html.BeginForm("AssembleInfo", "CreatePaperOrQuestion", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="assemble-col" style="height: auto; background-color: #e6e6e6; padding-right: 0px; margin-top: 40px; ">
+            <h4 class="col-md-3" style="font-family: 微软雅黑; font-weight: 600;">考点设置</h4>
+            <div onclick="collapse_Extend1()" class="btn-extend"><h4 id="assemble-btn-extend1" style="text-align: center;">-</h4></div>
+        </div>
+        <div id="assemble-knowlwdge-setting" class="assemble-col" style="height: auto; background-color: #e6e6e6; ">
+            <div style="margin-top: 20px;">
+                <div style="padding-left: 18px;" class="checkbox">
+                    <label style="font-family: 微软雅黑; font-weight: 600;">
+                        <input id="selectAllKnowledge" type="checkbox" />全 选
+                    </label>
+                </div>
+            </div>
+            <div style="margin-top: 20px;">
+                <div class="col-md-3" style="text-align: center; background-color: #cfcfcf; height: auto; padding: 0px; margin-right: 5px; ">
+                    <h4 style="font-family: 微软雅黑; background-color: #b9b9b9; margin: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; ">一级目录</h4>
+                    <ul class="nav nav-knowledge-select">
+                        <li><a href="#">集合</a></li>
+                        <li><a href="#">函数</a></li>
+                        <li><a href="#">向量</a></li>
+                        <li><a href="#">数列</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3" style="text-align: center; background-color: #cfcfcf; height: auto; padding: 0px; margin-right: 5px; ">
+                    <h4 style="font-family: 微软雅黑; background-color: #b9b9b9; margin: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; ">二级目录</h4>
+                    <ul class="nav nav-knowledge-select">
+                        <li><a href="#">集合间的运算关系</a></li>
+                        <li><a href="#">函数</a></li>
+                        <li><a href="#">向量</a></li>
+                        <li><a href="#">数列</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3" style="text-align: center; background-color: #cfcfcf; height: auto; padding: 0px; margin-right: 5px; ">
+                    <h4 style="font-family: 微软雅黑; background-color: #b9b9b9; margin: 0px; width: 100%; padding-top: 10px; padding-bottom: 10px; ">三级目录</h4>
+                    <ul class="nav nav-knowledge-select">
+                        <li><a href="#">集合</a></li>
+                        <li><a href="#">函数</a></li>
+                        <li><a href="#">向量</a></li>
+                        <li><a href="#">数列</a></li>
+                    </ul>
+                </div>
+                <div style="float: left; width: 22%; padding-top: 3px; text-align: center; ">
+                    <button id="assemble-knowledge-add" class=" button assemble-btn-add" style="border-radius: 30px;">添加</button>
+                    <p style="font-family: 微软雅黑; margin-top: 20px; "></p>
+                </div>
+            </div>
+            <div id="knowledgeLabel" class=" col-md-12" style="padding-left: 0px; margin-left: 0px; height: auto; margin-top: 20px; margin-bottom: 20px; margin-right: 20px; ">
+                <p style="font-family: 微软雅黑; font-size: large; margin-left: 20px; cursor: pointer; float: left; "><span class="label label-default">等差数列</span></p>
+                <p style="font-family: 微软雅黑; font-size: large; margin-left: 20px; cursor: pointer; float: left; "><span class="label label-default">函数的单调性</span></p>
+            </div>
+            <input type="hidden" value=""/>
+        </div>
+        <div class="assemble-col" style="height: auto; background-color: #e6e6e6; padding-right: 0px; margin-top: 40px; ">
+            <h4 class="col-md-3" style="font-family: 微软雅黑; font-weight: 600;">试卷内容设置</h4>
+            <div class="btn-extend"><h4 id="assemble-btn-extend2" style="text-align: center;">-</h4></div>
+        </div>
+        <div class="assemble-col" style="height: auto; background-color: #e6e6e6; padding-right: 0px; margin-top: 40px; ">
+            <h4 class="col-md-3" style="font-family: 微软雅黑; font-weight: 600;">难度分布设置</h4>
+            <div class="btn-extend"><h4 id="assemble-btn-extend3" style="text-align: center;">-</h4></div>
+        </div>
+    }
 </div>
 <div id="upload-intro" onmouseover="Mouse_in()" onmouseout="Mouse_out()" onclick="switchToUpload()" style="cursor: pointer; position: fixed; right: 11%; width: auto; height: auto; background-color: #f7f7f7; ">
     <div id="upload-description" style="position: fixed; display: none; width: 200px; background-color: #fccc8a; ">
-        <p>上传您的试卷，将资源与大家共享，加强交流，与名师一同探讨教研经验！</p>
+        <p style="font-family: 微软雅黑;">上传您的试卷，将资源与大家共享，加强交流，与名师一同探讨教研经验！</p>
     </div>
     <div style="width: 200px; height: 50px; background-color: #fccc8a; text-align: center; ">
         <h3 style="font-family: 微软雅黑; padding-top: 10px; ">上传试卷</h3>
@@ -52,5 +117,14 @@
     function Mouse_out() {
         $("#assemble-description,#upload-description").hide();
         $("#assemble-extend > img,#upload-extend > img").css("opacity", 0.3);
+    }
+</script>
+<script type="text/javascript">
+    function collapse_Extend1() {
+        $("#assemble-knowlwdge-setting").slideToggle(200);
+        if ($("#assemble-btn-extend1").html() == "+")
+            $("#assemble-btn-extend1").html("-");
+        else 
+            $("#assemble-btn-extend1").html("+");
     }
 </script>
