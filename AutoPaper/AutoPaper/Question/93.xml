@@ -1,0 +1,4 @@
+<content>
+已知数列{an}的前n项和为Sn，S(2n+1)=4n*n+2n，则此数列的通项公式为@。
+</content>
+<answer>an=2n-2</answer>
