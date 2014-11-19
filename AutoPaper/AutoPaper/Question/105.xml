@@ -1,4 +1,0 @@
-<content>
-已知数列的递推关系为a(n+1)=2an+1，且a1=1，an=@。 
-</content>
-<answer>(2^n)-1</answer>

@@ -1,17 +1,18 @@
 ﻿<div id="_login" style="display: none; position: fixed; left: 35%; top: 20%; width: 30%; background-color: #c8efc8; ">
     <div class="container-fluid" style="text-align: right; padding-top: 10px; ">
-        <a onclick="closeAll()" style="cursor: pointer; "><img src="~/PicRes/close.png"/></a>
+        <a onclick="closeAll()" style="cursor: pointer; "><img src="~/PicRes/close.png" /></a>
     </div>
     <div class="container-fluid" style="padding-top: 40px; padding-bottom: 50px;">
-        <form class="form-horizontal" role="form">
+        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
-                    <input type="email" class="form-control" placeholder="请输入登陆邮箱" />
+                    <input type="email" id="user-id" name="user-id" class="form-control" placeholder="请输入登陆邮箱" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
-                    <input type="password" class="form-control" placeholder="请输入密码" />
+                    <input type="password" id="user-key" name="user-key" class="form-control" placeholder="请输入密码" />
                 </div>
             </div>
             <div class="form-group">
@@ -34,6 +35,6 @@
                     <a class="button button-flat-highlight" style="margin-left: 9px; cursor: pointer;" onclick="onlyShowRegister()">注 册</a>
                 </div>
             </div>
-        </form>
+        }
     </div>
 </div>

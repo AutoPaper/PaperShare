@@ -3,7 +3,7 @@
 }
 
 <div style="width: 25%; height: 100%; float: left; color:transparent">.</div>
-<div style="position: fixed; text-align: center; width: 20%; background-color: #f7f7f7; height: auto; ">
+<div style="position: fixed; text-align: center; width: 20%; background-color: #f7f7f7; height: auto; margin-top: 10px; ">
     <h3 style="font-family: 微软雅黑,汉仪仿宋简; color: #32cd32; opacity: 0.75">试卷筛选</h3>
     <hr style="margin-bottom: 0px; " />
     <ul class="nav nav-pills">
@@ -15,26 +15,27 @@
 </div>
 <div style="float: left; width: 75%; height: auto; padding-left: 4%">
     <div class="hot-recommend">
-        <a id="hot-paper" class="active col-md-6" style="text-align: center; " onclick="barToPaper()">
-            <h3 style="font-family: 微软雅黑,汉仪仿宋简; ">热门试卷</h3>
+        <a id="hot-paper" class="active col-md-3" style="text-align: center; " onclick="barToPaper()">
+            <p style="font-family: 微软雅黑,汉仪仿宋简; font-size: 20px; margin-top: 10px;">热门试卷</p>
         </a>
-        <a id="hot-teacher" class="col-md-6" style="text-align: center; " onclick="barToTeacher()">
-            <h3 style="font-family: 微软雅黑,汉仪仿宋简; ">热门教师</h3>
+        <a id="hot-teacher" class="col-md-3" style="text-align: center; " onclick="barToTeacher()">
+            <p style="font-family: 微软雅黑,汉仪仿宋简; font-size: 20px;margin-top:10px;">热门教师</p>
         </a>
-        <div class="container-fluid">
-            <div id="smartbar" class="col-md-6" style=" background-color: #32cd32; height: 4px; "></div>
-            <hr style="padding-top: 0px; margin-top: 4px;" />
-        </div>
+        <div class="col-md-12"></div>
+        <div id="smartbar" class="col-md-3" style=" background-color: #32cd32; height: 4px; padding-top: 0px; margin-bottom: 0px; "></div>
+        <hr class="col-md-12" style="padding-top: 0px; margin-top: 0px;" />
     </div>
+    <img src="~/PicRes/content.png"/>
+    <div style="height: 80px;">.</div>
 </div>
 <script type="text/javascript">
     function barToTeacher() {
-        $("#smartbar").addClass("col-md-offset-6");
+        $("#smartbar").addClass("col-md-offset-3");
         $("#hot-paper").removeClass("active");
         $("#hot-teacher").addClass("active");
     }
     function barToPaper() {
-        $("#smartbar").removeClass("col-md-offset-6");
+        $("#smartbar").removeClass("col-md-offset-3");
         $("#hot-teacher").removeClass("active");
         $("#hot-paper").addClass("active");
     }
