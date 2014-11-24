@@ -25,15 +25,12 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("卷库网", "Index", "Home", null, new { @class = "navbar-brand" })
-            </div>
-            <ul class="nav navbar-nav">
-                <li><p style="font-size: 20px; color: #32cd32; font-family: Consolas; margin-top: 10px;">papershare.cn</p></li>
-            </ul>
+            <a href="/Home/Index">
+                <img class="navbar-left" style="margin-top: 5px; margin-bottom: 5px; cursor: pointer; " src="~/PicRes/logo.png" />
+            </a>
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="教师或试卷的信息">
+                    <input type="text" class="form-control " placeholder="教师或试卷的信息" />
                     <button type="submit" class="button button-flat-primary" style="margin-left: -5px;">搜 索</button>
                 </div>
             </form>
@@ -53,7 +50,15 @@
         @Html.Partial("_RegisterPartial")
     </div>
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var height = $(window).height() - 130;
+            $(".body-content").css("min-height", height);
+        });
+    </script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
 </body>
 </html>

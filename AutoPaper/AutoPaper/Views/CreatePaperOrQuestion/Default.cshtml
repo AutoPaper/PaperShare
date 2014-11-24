@@ -1,0 +1,78 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "新试卷-卷库网";
+}
+
+<div id="assemble-intro" onmouseover="Mouse_in()" onmouseout="Mouse_out()" onclick="switchToAssemble()" style="cursor: pointer; position: fixed; width: auto; height: auto; background-color: #f7f7f7; ">
+    <div id="assemble-description" style="position: fixed; display: none; width: 200px; background-color: #c1f0c1; ">
+        <p style="font-family: 微软雅黑;">海量试题，任由您挑选。全面的知识点，丰富的题型，灵活的难度组合，别致的出卷体验！</p>
+    </div>
+    <div style="width: 200px; height: 50px; background-color: #c1f0c1; text-align: center; ">
+        <h3 style="font-family: 微软雅黑; padding-top: 10px; ">试题精选</h3>
+    </div>
+    <div id="assemble-extend" style="background-color: #f7f7f7; width: 100%; height: auto; ">
+        <img style="margin-left: 50px; opacity: 0.3; " src="~/PicRes/assemble-extend.png" />
+    </div>
+</div>
+<div id="assemble-content" class="col-md-9" style="display: none; height: auto; background-color: #f7f7f7; padding-left: 0px; padding-right: 0px; padding-bottom: 40px; ">
+    @using (Ajax.BeginForm("searchQuestion", "CreatePaperOrQuestion", new AjaxOptions { 
+        HttpMethod = "Post", 
+        UpdateTargetId = "question", 
+        InsertionMode = InsertionMode.Replace }))
+    {
+        <div style="width: 300px; height: 75px; background-color: #c1f0c1; text-align: center; margin-top: 20px; margin-left: 0px; ">
+            <h2 style="font-family: 微软雅黑; padding-top: 20px; ">试  题  精  选</h2>
+        </div>
+        <div class="create-paper-col" style="height: auto; margin-top: 80px; padding-left: 0px; ">
+            <input type="text" class="col-md-1 form-control" placeholder="您想找什么样的题目呢？" />
+            <button type="submit" class="button button-flat-primary" style="margin-left: 0px;">搜 索</button>
+        </div>
+    }
+    @Html.Partial("_searchQuestionPartial")
+</div>
+<div id="upload-intro" onmouseover="Mouse_in()" onmouseout="Mouse_out()" onclick="switchToUpload()" style="cursor: pointer; display: none; position: fixed; right: 15%; width: auto; height: auto; background-color: #f7f7f7; ">
+    <div id="upload-description" style="position: fixed; display: none; width: 200px; background-color: #fccc8a; ">
+        <p style="font-family: 微软雅黑;">上传您的试卷，将资源与大家共享，加强交流，与名师一同探讨教研经验！</p>
+    </div>
+    <div style="width: 200px; height: 50px; background-color: #fccc8a; text-align: center; ">
+        <h3 style="font-family: 微软雅黑; padding-top: 10px; ">上传试卷</h3>
+    </div>
+    <div id="upload-extend" style="background-color: #f7f7f7; width: 100%; height: auto; ">
+        <img style="margin-left: 50px; opacity: 0.3; " src="~/PicRes/upload-extend.png" />
+    </div>
+</div>
+<div id="upload-content" class="col-md-offset-3 col-md-9" style=" float: right; height: auto; background-color: #f7f7f7; padding-bottom: 40px; padding-left: 0px; padding-right: 0px;">
+    <div style="width: 300px; height: 75px; background-color: #fccc8a; text-align: center; margin-top: 20px; margin-right: 0px; float: right; ">
+        <h2 style="font-family: 微软雅黑; ">上  传  试  卷</h2>
+    </div>
+    <div class="create-paper-col" style="height: auto; background-color: #b9b9b9; margin-top: 80px; border-top-left-radius: 10px;border-top-right-radius: 10px;">
+        <h3 style="font-family: 微软雅黑; margin-top: 20px; margin-bottom: 20px; float: left;">请点击下方按钮以上传您的试卷</h3>
+    </div>
+    <div class="create-paper-col" style="height: auto; background-color: #e6e6e6; margin-bottom: 80px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; ">
+        <input type="file" id="upload-doc" name="upload-doc" class="col-md-5" style="margin-top: 40px; margin-bottom: 40px; padding-top: 5px;">
+        <button type="submit" class=" col-md-2 col-md-offset-4 button button-flat-highlight" style="margin-top: 40px; margin-bottom: 20px;">确 认</button>
+    </div>
+</div>
+<script type="text/javascript">
+    function switchToUpload() {
+        $("#assemble-content").toggle(400);
+        $("#upload-intro").hide();
+        $("#assemble-intro").show(400);
+        $("#upload-content").toggle(400);
+    }
+    function switchToAssemble() {
+        $("#upload-content").toggle(400);
+        $("#assemble-intro").hide();
+        $("#upload-intro").show(400);
+        $("#assemble-content").toggle(400);
+    }
+    function Mouse_in() {
+        $("#assemble-description,#upload-description").show();
+        $("#assemble-extend > img,#upload-extend > img").css("opacity",1);
+    }
+
+    function Mouse_out() {
+        $("#assemble-description,#upload-description").hide();
+        $("#assemble-extend > img,#upload-extend > img").css("opacity", 0.3);
+    }
+</script>@*选题与上传之间的切换*@

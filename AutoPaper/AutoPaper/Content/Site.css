@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 60px;
     padding-bottom: 0px;
 }
 
@@ -97,7 +97,7 @@ input[type="checkbox"].input-validation-error {
     background-color: #bfbfbf;
 }
 
-.assemble-col {
+.create-paper-col {
     position: relative;
     float: left;
     width: 92%;
