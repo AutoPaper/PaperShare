@@ -1,0 +1,224 @@
+﻿<div id="search-question">
+    <div id="choice-question">
+        <div style="width: 20%; height: 40px; background-color: #c1f0c1; margin-left: 40%; clear: both; ">
+            <h3 style="font-family: 微软雅黑; margin-top: 6px; margin-left: 10px; float: left;">选 择 题</h3>
+            <div id="choice-fold" onclick="choiceFold()" style="background-color: #b0e0b0; float: right; height: 40px; width: 40px; padding-top: 10px; text-align: center; font-weight: bolder; cursor: pointer; ">-</div>
+        </div>
+        @foreach (var choice_question in ViewBag.choiceQuestion)
+        {
+            string hardness;
+            int difficulty = choice_question.difficulty;
+            switch (difficulty)
+            {
+                case 1: hardness = "容易"; break;
+                case 2: hardness = "一般"; break;
+                case 3: hardness = "难"; break;
+                default: hardness = "待添加"; break;
+            }
+            <div class="create-paper-col" style="height: 35px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 0px;  ">
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：选择题</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">更新时间：2014/11/11</p>
+            </div>
+            <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                @choice_question.content
+            </div>
+            <div id="showDetail" class="create-paper-col" style="margin-top: 0px;  padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                @Ajax.ActionLink("答案", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "showDetail",
+                    OnBegin = "showAnswer()"
+                }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
+                @Ajax.ActionLink("挑错", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "showDetail",
+                    OnBegin = "showAnswer()"
+                }, new { style = "font-family:微软雅黑; margin-right:10px;text-decoration:none" })
+                <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">收藏该题</a>
+                <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">加入试卷</a>
+            </div>
+        }
+    </div>
+    <div id="blank-question" style="padding-top: 20px; clear: both;">
+        <div style="width: 20%; height: 40px; background-color: #c1f0c1; margin-left: 40%; clear: both; ">
+            <h3 style="font-family: 微软雅黑; margin-top: 6px; margin-left: 10px; float: left;">填 空 题</h3>
+            <div id="blank-fold" onclick="blankFold()" style="background-color: #b0e0b0; float: right; height: 40px; width: 40px; padding-top: 10px; text-align: center; font-weight: bolder; cursor: pointer; ">-</div>
+        </div>
+        @foreach (var blank_question in ViewBag.blankQuestion)
+        {
+            string hardness;
+            int difficulty = blank_question.difficulty;
+            switch (difficulty)
+            {
+                case 1: hardness = "容易"; break;
+                case 2: hardness = "一般"; break;
+                case 3: hardness = "难"; break;
+                default: hardness = "待添加"; break;
+            }
+            <div class="create-paper-col" style="height: 35px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 0px;  ">
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：填空题</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">更新时间：2014/11/11</p>
+            </div>
+            <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                @blank_question.content
+            </div>
+            <div id="showDetail" class="create-paper-col" style="margin-top: 0px;  padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                @Ajax.ActionLink("答案", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "showDetail",
+                    OnBegin = "showAnswer()"
+                }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
+                @Ajax.ActionLink("挑错", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "showDetail",
+                    OnBegin = "showAnswer()"
+                }, new { style = "font-family:微软雅黑; margin-right:10px;text-decoration:none" })
+                <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">收藏该题</a>
+                <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">加入试卷</a>
+            </div>
+        }
+    </div>
+    <div id="judge-question" style="padding-top: 20px; clear: both;">
+        <div style="width: 20%; height: 40px; background-color: #c1f0c1; margin-left: 40%; clear: both; ">
+            <h3 style="font-family: 微软雅黑; margin-top: 6px; margin-left: 10px; float: left;">判 断 题</h3>
+            <div id="judge-fold" onclick="judgeFold()" style="background-color: #b0e0b0; float: right; height: 40px; width: 40px; padding-top: 10px; text-align: center; font-weight: bolder; cursor: pointer; ">-</div>
+        </div>
+        @foreach (var judge_question in ViewBag.judgeQuestion)
+        {
+            string hardness;
+            int difficulty = judge_question.difficulty;
+            switch (difficulty)
+            {
+                case 1: hardness = "容易"; break;
+                case 2: hardness = "一般"; break;
+                case 3: hardness = "难"; break;
+                default: hardness = "待添加"; break;
+            }
+            <div class="create-paper-col" style="height: 35px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 0px;  ">
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：判断题</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">更新时间：2014/11/11</p>
+            </div>
+            <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                @judge_question.content
+            </div>
+            <div id="showDetail" class="create-paper-col" style="margin-top: 0px;  padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                @Ajax.ActionLink("答案", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "showDetail",
+                    OnBegin = "showAnswer()"
+                }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
+                @Ajax.ActionLink("挑错", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "showDetail",
+                    OnBegin = "showAnswer()"
+                }, new { style = "font-family:微软雅黑; margin-right:10px;text-decoration:none" })
+                <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">收藏该题</a>
+                <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">加入试卷</a>
+            </div>
+        }
+    </div>
+    <div id="integrated-question" style="padding-top: 20px; clear: both; ">
+        <div style="width: 20%; height: 40px; background-color: #c1f0c1; margin-left: 40%; clear: both;">
+            <h3 style="font-family: 微软雅黑; margin-top: 6px; margin-left: 10px; float: left;">综 合 题</h3>
+            <div id="integrated-fold" onclick="integratedFold()" style="background-color: #b0e0b0; float: right; height: 40px; width: 40px; padding-top: 10px; text-align: center; font-weight: bolder; cursor: pointer; ">-</div>
+        </div>
+        @foreach (var integrated_question in ViewBag.integratedQuestion)
+        {
+            string hardness;
+            int difficulty = integrated_question.difficulty;
+            switch (difficulty)
+            {
+                case 1: hardness = "容易"; break;
+                case 2: hardness = "一般"; break;
+                case 3: hardness = "难"; break;
+                default: hardness = "待添加"; break;
+            }
+            <div class="create-paper-col" style="height: 35px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 0px;  ">
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：综合题</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">更新时间：2014/11/11</p>
+            </div>
+            <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                @integrated_question.content
+            </div>
+            <div id="showDetail" class="create-paper-col" style="margin-top: 0px; margin-bottom: 20px; padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                @Ajax.ActionLink("答案", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "showDetail",
+                    OnBegin = "showAnswer()"
+                }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
+                @Ajax.ActionLink("挑错", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "showDetail",
+                    OnBegin = "showAnswer()"
+                }, new { style = "font-family:微软雅黑; margin-right:10px;text-decoration:none" })
+                <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">收藏该题</a>
+                <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">加入试卷</a>
+            </div>
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    function choiceFold() {
+        if ($("#choice-fold").html() == "-") {
+            $("#choice-question .create-paper-col").slideUp(500);
+            $("#choice-fold").html("+");
+        }
+        else if ($("#choice-fold").html() == "+") {
+            $("#choice-question .create-paper-col").slideDown(500);
+            $("#choice-fold").html("-");
+        }  
+    }
+    function blankFold() {
+        if ($("#blank-fold").html() == "-") {
+            $("#blank-question .create-paper-col").slideUp(500);
+            $("#blank-fold").html("+");
+        }
+        else if ($("#blank-fold").html() == "+") {
+            $("#blank-question .create-paper-col").slideDown(500);
+            $("#blank-fold").html("-");
+        }
+    }
+    function judgeFold() {
+        if ($("#judge-fold").html() == "-") {
+            $("#judge-question .create-paper-col").slideUp(500);
+            $("#judge-fold").html("+");
+        }
+        else if ($("#judge-fold").html() == "+") {
+            $("#judge-question .create-paper-col").slideDown(500);
+            $("#judge-fold").html("-");
+        }
+    }
+    function integratedFold() {
+        if ($("#integrated-fold").html() == "-") {
+            $("#integrated-question .create-paper-col").slideUp(500);
+            $("#integrated-fold").html("+");
+        }
+        else if ($("#integrated-fold").html() == "+") {
+            $("#integrated-question .create-paper-col").slideDown(500);
+            $("#integrated-fold").html("-");
+        }
+    }
+</script>@*块的折叠*@

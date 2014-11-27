@@ -822,8 +822,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
     <Content Include="Views\CreatePaperOrQuestion\Default.cshtml" />
-    <Content Include="Views\CreatePaperOrQuestion\AssembleResult.cshtml" />
-    <Content Include="Views\CreatePaperOrQuestion\_searchQuestionPartial.cshtml" />
+    <Content Include="Views\CreatePaperOrQuestion\_searchPartial.cshtml" />
+    <Content Include="Views\CreatePaperOrQuestion\_uploadPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
