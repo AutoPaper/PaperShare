@@ -1,24 +1,40 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.Cookies["userID"] == null)
 {
-    if (ViewBag.userType == "student")
+    //string userName = Request.Cookies["userName"].Value;
+    if (false)// (Request.Cookies["userType"].Value == "student")
     {
-        
-    }
-    else
-    {
-        <div class="btn-group nav navbar-nav navbar-right" style="margin-top: 0px; height: 55px;">
-            <button type="button" style="height: inherit; width: 160px; border: 0px; " class="button button-dropdown button-border" data-toggle="dropdown" aria-expanded="false">
-                nnuzhangzhi <span class="caret"></span>
+        <div class="btn-group nav navbar-nav navbar-right" onmouseout="autoUp()" style="margin-top: 0px; height: 55px;">
+            <button type="button" onmouseup="autoDrop()" style="height: inherit; width: 160px; border: 0px; " class="button button-dropdown button-border" data-toggle="dropdown" aria-expanded="false">
+                @*@userName*@ <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; " >出试卷</a></li>
+            <ul id="userList" class="dropdown-menu" role="menu">
+                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">出试卷</a></li>
                 <li class="divider"></li>
                 <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">个人中心</a></li>
                 <li class="divider"></li>
                 <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">我的试卷</a></li>
                 <li class="divider"></li>
                 <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">我的收藏</a></li>
+            </ul>
+        </div>
+    }
+    else// if (Request.Cookies["userType"].Value == "teacher")
+    {
+        <div class="btn-group nav navbar-nav navbar-right" style="margin-top: 0px; height: 55px;">
+            <button type="button" style="height: inherit; width: 160px; border: 0px; " class="button button-dropdown button-border" data-toggle="dropdown" aria-expanded="false">
+                nnuzhangzhi <span class="caret"> </span>
+            </button>
+            <ul id="userList" class="dropdown-menu" role="menu">
+                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">出试卷</a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">个人中心</a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">我的试卷</a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">我的收藏</a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">注销账号</a></li>
             </ul>
         </div>
     }

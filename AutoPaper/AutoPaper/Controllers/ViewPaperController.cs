@@ -14,7 +14,7 @@ namespace AutoPaper.Controllers
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
-        public ActionResult Paper(int id)
+        public ActionResult Paper(int id = 0)
         {
             return View();
         }
@@ -23,6 +23,12 @@ namespace AutoPaper.Controllers
         public ActionResult Comment()
         {
             return RedirectToAction("Paper");
+        }
+
+        [HttpPost]
+        public bool hasSHA()
+        {
+            return true;
         }
     }
 }

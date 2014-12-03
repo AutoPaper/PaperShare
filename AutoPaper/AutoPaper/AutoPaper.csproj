@@ -819,12 +819,12 @@
     <Content Include="Views\CreatePaperOrQuestion\Default.cshtml" />
     <Content Include="Views\CreatePaperOrQuestion\_searchPartial.cshtml" />
     <Content Include="Views\CreatePaperOrQuestion\_uploadPartial.cshtml" />
+    <Content Include="Views\ViewPaper\Paper.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Paper\" />
     <Folder Include="Views\IndividualCentre\" />
-    <Folder Include="Views\ViewPaper\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

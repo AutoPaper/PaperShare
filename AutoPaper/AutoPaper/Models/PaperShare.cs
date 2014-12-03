@@ -30,7 +30,6 @@ namespace AutoPaper.Models
     {
         public int ID { get; set; }
         public string name { get; set; }
-        public bool isPublic { get; set; }
         public float quality { get; set; }
         public int qualityVotes { get; set; }
         public float difficulty { get; set; }

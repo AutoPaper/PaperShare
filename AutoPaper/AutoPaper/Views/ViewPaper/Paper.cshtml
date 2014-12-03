@@ -1,0 +1,51 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="assemble-intro" onmouseover="Mouse_in()" onmouseout="Mouse_out()" onclick="switchToAssemble()" style="cursor: pointer; position: fixed; width: auto; height: auto; background-color: #f7f7f7; ">
+    <div style="width: 200px; height: 50px; background-color: #c1f0c1; text-align: center; ">
+        <h3 style="font-family: 微软雅黑; padding-top: 10px; ">试卷评论</h3>
+    </div>
+    <div id="assemble-extend" style="background-color: #f7f7f7; width: 100%; height: auto; ">
+        <img style="margin-left: 50px; opacity: 0.3; " src="~/PicRes/assemble-extend.png" />
+    </div>
+</div>
+<div id="assemble-content" class="col-md-9" style="display: none; height: auto; background-color: #f7f7f7; padding-left: 0px; padding-right: 0px; padding-bottom: 40px; ">
+    <div style="width: 300px; height: 75px; background-color: #c1f0c1; text-align: center; margin-top: 20px; margin-left: 0px; ">
+        <h2 style="font-family: 微软雅黑; padding-top: 20px; ">试  卷  评  论</h2>
+    </div>
+</div>
+<div id="upload-intro" onmouseover="Mouse_in()" onmouseout="Mouse_out()" onclick="switchToUpload()" style="cursor: pointer; display: none; position: fixed; right: 15%; width: auto; height: auto; background-color: #f7f7f7; ">
+    <div style="width: 200px; height: 50px; background-color: #fccc8a; text-align: center; ">
+        <h3 style="font-family: 微软雅黑; padding-top: 10px; ">试卷内容</h3>
+    </div>
+    <div id="upload-extend" style="background-color: #f7f7f7; width: 100%; height: auto; ">
+        <img style="margin-left: 50px; opacity: 0.3; " src="~/PicRes/upload-extend.png" />
+    </div>
+</div>
+<div id="upload-content" class="col-md-offset-3 col-md-9" style=" float: right; height: auto; background-color: #f7f7f7; padding-bottom: 40px; padding-left: 0px; padding-right: 0px;">
+    <div style="width: 300px; height: 75px; background-color: #fccc8a; text-align: center; margin-top: 20px; margin-right: 0px; float: right; ">
+        <h2 style="font-family: 微软雅黑; ">试  卷  内  容</h2>
+    </div>
+</div>
+<script type="text/javascript">
+    function switchToUpload() {
+        $("#assemble-content").toggle(400);
+        $("#upload-intro").hide();
+        $("#assemble-intro").show(400);
+        $("#upload-content").toggle(400);
+    }
+    function switchToAssemble() {
+        $("#upload-content").toggle(400);
+        $("#assemble-intro").hide();
+        $("#upload-intro").show(400);
+        $("#assemble-content").toggle(400);
+    }
+    function Mouse_in() {
+        $("#assemble-extend > img,#upload-extend > img").css("opacity", 1);
+    }
+
+    function Mouse_out() {
+        $("#assemble-extend > img,#upload-extend > img").css("opacity", 0.3);
+    }
+</script>@*评论与试卷内容之间的切换*@
