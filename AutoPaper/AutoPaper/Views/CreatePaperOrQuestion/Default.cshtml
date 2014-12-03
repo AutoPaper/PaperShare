@@ -18,7 +18,7 @@
     <div style="width: 300px; height: 75px; background-color: #c1f0c1; text-align: center; margin-top: 20px; margin-left: 0px; ">
         <h2 style="font-family: 微软雅黑; padding-top: 20px; ">试  题  精  选</h2>
     </div>
-    @using (Ajax.BeginForm("Default", "CreatePaperOrQuestion", new { id = "search" }, new AjaxOptions
+    @using (Ajax.BeginForm("getQuestion", "CreatePaperOrQuestion", new AjaxOptions
     {
         HttpMethod = "Post",
         UpdateTargetId = "search-question",
@@ -47,7 +47,7 @@
     <div style="width: 300px; height: 75px; background-color: #fccc8a; text-align: center; margin-top: 20px; margin-right: 0px; float: right; ">
         <h2 style="font-family: 微软雅黑; ">上  传  试  卷</h2>
     </div>
-    @using (Ajax.BeginForm("Default", "CreatePaperOrQuestion", new { id = "upload" }, new AjaxOptions
+    @using (Ajax.BeginForm("Default", "CreatePaperOrQuestion", new AjaxOptions
     {
         HttpMethod = "Post",
         UpdateTargetId = "upload-question",

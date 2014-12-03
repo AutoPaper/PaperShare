@@ -161,6 +161,7 @@
     <Compile Include="Controllers\CreatePaperOrQuestionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IndividualCentreController.cs" />
+    <Compile Include="Controllers\ViewPaperController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -172,7 +173,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\buttons.css" />
-    <Content Include="Content\mystyle.css" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -814,11 +814,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Shared\_AccountPartial.cshtml" />
-    <Content Include="Views\IndividualCentre\Create.cshtml" />
-    <Content Include="Views\IndividualCentre\Delete.cshtml" />
-    <Content Include="Views\IndividualCentre\Details.cshtml" />
-    <Content Include="Views\IndividualCentre\Edit.cshtml" />
-    <Content Include="Views\IndividualCentre\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_RegisterPartial.cshtml" />
     <Content Include="Views\CreatePaperOrQuestion\Default.cshtml" />
@@ -828,6 +823,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Paper\" />
+    <Folder Include="Views\IndividualCentre\" />
+    <Folder Include="Views\ViewPaper\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

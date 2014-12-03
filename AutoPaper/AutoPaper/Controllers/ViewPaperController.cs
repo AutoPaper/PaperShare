@@ -10,25 +10,19 @@ using AutoPaper.Models;
 
 namespace AutoPaper.Controllers
 {
-    public class IndividualCentreController : Controller
+    public class ViewPaperController : Controller
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
-        public ActionResult Default()
+        public ActionResult Paper(int id)
         {
             return View();
         }
-        public ActionResult MyPapers()
+
+        [HttpPost]
+        public ActionResult Comment()
         {
-            return View();
-        }
-        public ActionResult MyCollectQuestion()
-        {
-            return View();
-        }
-        public ActionResult MyCollectPapers()
-        {
-            return View();
+            return RedirectToAction("Paper");
         }
     }
 }

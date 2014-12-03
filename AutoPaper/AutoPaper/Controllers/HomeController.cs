@@ -13,6 +13,7 @@ namespace AutoPaper.Controllers
     public class HomeController : Controller
     {
         private PaperShareDBContext db = new PaperShareDBContext();
+
         public ActionResult Index()
         {
             return View();
@@ -31,6 +32,10 @@ namespace AutoPaper.Controllers
                 cookie.Value = Convert.ToString(person[0].ID);
                 Response.Cookies.Add(cookie);
             }
+            return RedirectToAction("Index");
+        }
+        public ActionResult Register()
+        {
             return RedirectToAction("Index");
         }
     }

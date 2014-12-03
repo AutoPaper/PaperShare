@@ -6,6 +6,7 @@
         </div>
         @foreach (var choice_question in ViewBag.choiceQuestion)
         {
+            int ID = choice_question.ID;
             string hardness;
             int difficulty = choice_question.difficulty;
             switch (difficulty)
@@ -25,22 +26,22 @@
                 @choice_question.content
             </div>
             <div id="showDetail" class="create-paper-col" style="margin-top: 0px;  padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
-                @Ajax.ActionLink("答案", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                @Ajax.ActionLink("答案", "getAnswer", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     InsertionMode = InsertionMode.Replace,
-                    UpdateTargetId = "showDetail",
+                    UpdateTargetId = "@ID",
                     OnBegin = "showAnswer()"
                 }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
-                @Ajax.ActionLink("挑错", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                @Ajax.ActionLink("挑错", "findError", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
-                    InsertionMode = InsertionMode.Replace,
                     UpdateTargetId = "showDetail",
                     OnBegin = "showAnswer()"
                 }, new { style = "font-family:微软雅黑; margin-right:10px;text-decoration:none" })
                 <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">收藏该题</a>
                 <a class="question-button" style="text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; ">加入试卷</a>
+                <div id="@ID"></div>
             </div>
         }
     </div>
@@ -51,6 +52,7 @@
         </div>
         @foreach (var blank_question in ViewBag.blankQuestion)
         {
+            int ID = blank_question.ID;
             string hardness;
             int difficulty = blank_question.difficulty;
             switch (difficulty)
@@ -70,14 +72,14 @@
                 @blank_question.content
             </div>
             <div id="showDetail" class="create-paper-col" style="margin-top: 0px;  padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
-                @Ajax.ActionLink("答案", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                @Ajax.ActionLink("答案", "getAnswer", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     InsertionMode = InsertionMode.Replace,
                     UpdateTargetId = "showDetail",
                     OnBegin = "showAnswer()"
                 }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
-                @Ajax.ActionLink("挑错", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                @Ajax.ActionLink("挑错", "findError", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     InsertionMode = InsertionMode.Replace,
@@ -96,6 +98,7 @@
         </div>
         @foreach (var judge_question in ViewBag.judgeQuestion)
         {
+            int ID = judge_question.ID;
             string hardness;
             int difficulty = judge_question.difficulty;
             switch (difficulty)
@@ -115,14 +118,14 @@
                 @judge_question.content
             </div>
             <div id="showDetail" class="create-paper-col" style="margin-top: 0px;  padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
-                @Ajax.ActionLink("答案", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                @Ajax.ActionLink("答案", "getAnswer", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     InsertionMode = InsertionMode.Replace,
                     UpdateTargetId = "showDetail",
                     OnBegin = "showAnswer()"
                 }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
-                @Ajax.ActionLink("挑错", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                @Ajax.ActionLink("挑错", "findError", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     InsertionMode = InsertionMode.Replace,
@@ -141,6 +144,7 @@
         </div>
         @foreach (var integrated_question in ViewBag.integratedQuestion)
         {
+            int ID = integrated_question.ID;
             string hardness;
             int difficulty = integrated_question.difficulty;
             switch (difficulty)
@@ -160,14 +164,14 @@
                 @integrated_question.content
             </div>
             <div id="showDetail" class="create-paper-col" style="margin-top: 0px; margin-bottom: 20px; padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
-                @Ajax.ActionLink("答案", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                @Ajax.ActionLink("答案", "getAnswer", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     InsertionMode = InsertionMode.Replace,
                     UpdateTargetId = "showDetail",
                     OnBegin = "showAnswer()"
                 }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
-                @Ajax.ActionLink("挑错", "Default", "CreatePaperOrQuestion", new AjaxOptions
+                @Ajax.ActionLink("挑错", "findError", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     InsertionMode = InsertionMode.Replace,

@@ -12,8 +12,9 @@ namespace AutoPaper.Models
     {
         public int ID { get; set; }
         public string keyhash { get; set; }
+        public string email { get; set; }
         public string name { get; set; }
-        public int authority { get; set; }
+        public int role { get; set; }
         public string picAddr { get; set; }
     }
     public class follow
@@ -28,14 +29,13 @@ namespace AutoPaper.Models
     public class papers
     {
         public int ID { get; set; }
-        public string paperAddr { get; set; }
         public string name { get; set; }
         public bool isPublic { get; set; }
         public float quality { get; set; }
         public int qualityVotes { get; set; }
         public float difficulty { get; set; }
         public int difficultyVotes { get; set; }
-        public string SHA { get; set; }
+        public string SHACode { get; set; }
     }
     public class PU
     {
@@ -59,18 +59,26 @@ namespace AutoPaper.Models
         public DateTime createTime { get; set; }
         public int doneCount { get; set; }
     }
-    public class knowledgeTree
-    {
-        [Key]
-        public int ID { get; set; }
-        public string knowledge { get; set; }
-        public int parentID { get; set; }
-    }
-    public class PK
+    public class PQ
     {
         [Key]
         [Column(Order = 0)]
-        public string knowledge { get; set; }
+        public int paperID { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        public int questionID { get; set; }
+    }
+    public class tags
+    {
+        [Key]
+        public int ID { get; set; }
+        public string content { get; set; }
+    }
+    public class PTags
+    {
+        [Key]
+        [Column(Order = 0)]
+        public int tagID { get; set; }
         [Key]
         [Column(Order = 1)]
         public int paperID { get; set; }
@@ -78,30 +86,23 @@ namespace AutoPaper.Models
     public class question
     {
         public int ID { get; set; }
+        public int teacherID { get; set; }
+        public string subject { get; set; }
         public string content { get; set; }
         public string answer { get; set; }
         public int questionType { get; set; }
         public int difficulty { get; set; }
-        public int citation { get; set; }
+        public int citationCount { get; set; }
+        public DateTime updateTime { get; set; }
     }
-    public class QK
+    public class QTags
     {
         [Key]
         [Column(Order = 0)]
-        public string knowledge { get; set; }
+        public int tagID { get; set; }
         [Key]
         [Column(Order = 1)]
         public int questionID { get; set; }
-    }
-    public class selectHistory
-    {
-        [Key]
-        [Column(Order = 0)]
-        public int questionID { get; set; }
-        [Key]
-        [Column(Order = 1)]
-        public int teacherID { get; set; }
-        public DateTime time { get; set; }
     }
     public class PaperShareDBContext : DbContext
     {
@@ -110,10 +111,10 @@ namespace AutoPaper.Models
         public DbSet<papers> paper_table { get; set; }
         public DbSet<PU> PU_table { get; set; }
         public DbSet<PT> PT_table { get; set; }
-        public DbSet<knowledgeTree> knowledgeTree_table { get; set; }
-        public DbSet<PK> PK_table { get; set; }
+        public DbSet<PQ> PQ_table { get; set; }
+        public DbSet<tags> tag_table { get; set; }
+        public DbSet<PTags> PTags_table { get; set; }
         public DbSet<question> question_table { get; set; }
-        public DbSet<QK> QK_table { get; set; }
-        public DbSet<selectHistory> selectHistory_table { get; set; }
+        public DbSet<QTags> QTags_table { get; set; }
     }
 }

@@ -11,6 +11,13 @@
     min-height: 490px;
 }
 
+p#copyright {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: black;
+}
+
 input,
 select,
 textarea {
