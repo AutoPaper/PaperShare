@@ -17,6 +17,13 @@ namespace AutoPaper.Models
         public int role { get; set; }
         public string picAddr { get; set; }
     }
+    public class notices
+    {
+        [Key]
+        public int userID { get; set; }
+        public int toID { get; set; }
+        public string content { get; set; }
+    }
     public class follow
     {
         [Key]
@@ -25,6 +32,12 @@ namespace AutoPaper.Models
         [Key]
         [Column(Order = 1)]
         public int followID { get; set; }
+    }
+    public class errorHistory
+    {
+        public int fromID { get; set; }
+        public int toID { get; set; }
+        public string content { get; set; }
     }
     public class papers
     {
@@ -106,7 +119,9 @@ namespace AutoPaper.Models
     public class PaperShareDBContext : DbContext
     {
         public DbSet<users> user_table { get; set; }
+        public DbSet<notices> notice_table { get; set; }
         public DbSet<follow> follow_table { get; set; }
+        public DbSet<errorHistory> error_table { get; set; }
         public DbSet<papers> paper_table { get; set; }
         public DbSet<PU> PU_table { get; set; }
         public DbSet<PT> PT_table { get; set; }

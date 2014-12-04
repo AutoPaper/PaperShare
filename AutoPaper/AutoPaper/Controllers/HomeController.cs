@@ -18,8 +18,7 @@ namespace AutoPaper.Controllers
         {
             return View();
         }
-        [HttpPost]
-        public ActionResult Login()
+        public string Login(string nextActionName = "")
         {
             var name = Request.Form["user-id"];
             var key = Request.Form["user-key"];
@@ -40,8 +39,16 @@ namespace AutoPaper.Controllers
                     cookie.Expires = DateTime.Now.AddDays(7);//7天过期
                     Response.Cookies.Add(cookie);
                 }
+                if (nextActionName == "")
+                    RedirectToAction("Index");
+                else
+                    RedirectToAction(nextActionName);
+                return "";
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return "用户名或密码错误！";
+            }
         }
         public ActionResult Register()
         {

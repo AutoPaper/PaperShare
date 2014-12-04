@@ -18,6 +18,10 @@ namespace AutoPaper.Controllers
         {
             return View();
         }
+        public ActionResult Account()
+        {
+            return View();
+        }
         public ActionResult MyPapers()
         {
             return View();
@@ -27,6 +31,10 @@ namespace AutoPaper.Controllers
             return View();
         }
         public ActionResult MyCollectPapers()
+        {
+            return View();
+        }
+        public ActionResult MyErrorsFound()
         {
             return View();
         }
