@@ -1,13 +1,19 @@
-﻿<div id="_login" style="display: none; position: fixed; left: 35%; top: 20%; width: 30%; background-color: #c8efc8; ">
+﻿<div id="_login" style="display: none; position: fixed; left: 35%; top: 20%; width: 30%; background-color: #c8efc8; border: 10px solid #b9b9b9; ">
     <div class="container-fluid" style="text-align: right; padding-top: 10px; ">
         <a onclick="closeAll()" style="cursor: pointer; "><img src="~/PicRes/close.png" /></a>
     </div>
-    <div class="container-fluid" style="padding-top: 40px; padding-bottom: 50px;">
-        @using (Html.BeginForm("Login", "Home", FormMethod.Post, new { @class = "form-horizontal" }))
+    <div class="container-fluid" style="padding-top: 40px; padding-bottom: 50px; ">
+        @using (Ajax.BeginForm("Login", "Home", null, new AjaxOptions
         {
+            HttpMethod = "Post",
+            UpdateTargetId = "wrongLogin",
+            InsertionMode = InsertionMode.Replace
+        }, new { @class = "form-horizontal" }))
+        {
+            <div class="col-sm-offset-1" id="wrongLogin" style="padding-left: 3px; margin-bottom: 5px; color: red; font-family: 微软雅黑; font-size: 15px; "></div>
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
-                    <input type="email" id="user-id" name="user-id" class="form-control" placeholder="请输入登陆邮箱" />
+                    <input type="text" id="user-email" name="user-email" class="form-control" placeholder="请输入登陆邮箱" />
                 </div>
             </div>
             <div class="form-group">

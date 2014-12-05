@@ -18,12 +18,13 @@ namespace AutoPaper.Controllers
         {
             return View();
         }
-        public string Login(string nextActionName = "")
+        [HttpPost]
+        public string Login()
         {
-            var name = Request.Form["user-id"];
+            var email = Request.Form["user-email"];
             var key = Request.Form["user-key"];
             var person = (from o in db.user_table
-                          where o.name == name && o.keyhash == key
+                          where o.email == email && o.keyhash == key
                           select o).ToArray();
             if (person.Length == 1)
             {
@@ -39,10 +40,14 @@ namespace AutoPaper.Controllers
                     cookie.Expires = DateTime.Now.AddDays(7);//7天过期
                     Response.Cookies.Add(cookie);
                 }
-                if (nextActionName == "")
-                    RedirectToAction("Index");
-                else
+                if (Session["nextActionName"] != null)
+                {
+                    string nextActionName = Session["nextActionName"].ToString();
+                    Session.Contents.Remove("nextActionName");
                     RedirectToAction(nextActionName);
+                }
+                else
+                    RedirectToAction("Index");
                 return "";
             }
             else

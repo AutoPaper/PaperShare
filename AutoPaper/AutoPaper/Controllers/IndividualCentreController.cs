@@ -22,6 +22,10 @@ namespace AutoPaper.Controllers
         {
             return View();
         }
+        public bool KeyChangeConfirm()
+        {
+            return true;
+        }
         public ActionResult MyPapers()
         {
             return View();

@@ -20,8 +20,11 @@ namespace AutoPaper.Models
     public class notices
     {
         [Key]
+        [Column(Order = 0)]
         public int userID { get; set; }
-        public int toID { get; set; }
+        public int noticeType { get; set; }
+        [Key]
+        [Column(Order = 1)]
         public string content { get; set; }
     }
     public class follow
@@ -35,9 +38,25 @@ namespace AutoPaper.Models
     }
     public class errorHistory
     {
+        [Key]
+        [Column(Order = 0)]
         public int fromID { get; set; }
+        [Key]
+        [Column(Order = 1)]
         public int toID { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        public int questionID { get; set; }
         public string content { get; set; }
+    }
+    public class QU
+    {
+        [Key]
+        [Column(Order = 0)]
+        public int userID { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        public int questionID { get; set; }
     }
     public class papers
     {
@@ -122,6 +141,7 @@ namespace AutoPaper.Models
         public DbSet<notices> notice_table { get; set; }
         public DbSet<follow> follow_table { get; set; }
         public DbSet<errorHistory> error_table { get; set; }
+        public DbSet<QU> QU_table { get; set; }
         public DbSet<papers> paper_table { get; set; }
         public DbSet<PU> PU_table { get; set; }
         public DbSet<PT> PT_table { get; set; }

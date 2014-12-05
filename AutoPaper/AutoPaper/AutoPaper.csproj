@@ -820,6 +820,8 @@
     <Content Include="Views\CreatePaperOrQuestion\_searchPartial.cshtml" />
     <Content Include="Views\CreatePaperOrQuestion\_uploadPartial.cshtml" />
     <Content Include="Views\ViewPaper\Paper.cshtml" />
+    <Content Include="Views\ViewPaper\_commentPartial.cshtml" />
+    <Content Include="Views\ViewPaper\_paperPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
