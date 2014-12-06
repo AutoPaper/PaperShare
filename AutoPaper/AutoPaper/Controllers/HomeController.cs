@@ -35,6 +35,7 @@ namespace AutoPaper.Controllers
                 else
                     userCookie[1] = new HttpCookie("userName", Convert.ToString(person[0].email));
                 userCookie[2] = new HttpCookie("userType", Convert.ToString(person[0].role));
+                userCookie[3] = new HttpCookie("userSubject", "Maths");
                 foreach (var cookie in userCookie)
                 {
                     cookie.Expires = DateTime.Now.AddDays(7);//7天过期

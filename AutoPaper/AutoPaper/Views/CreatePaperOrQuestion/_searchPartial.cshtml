@@ -46,13 +46,14 @@
                     OnSuccess = "collectQuestionAlert()"
                 }, new { @class = "question-button", style = "text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; " })
                 <div id="findError-@ID" style="display: none; margin-top: 20px;">
-                    <textarea class=" col-md-offset-1 form-control" rows="3" placeholder="您觉得哪里有问题就写下来吧"></textarea>
+                    <textarea name="errorContent" class=" col-md-offset-1 form-control" rows="3" placeholder="您觉得哪里有问题就写下来吧"></textarea>
                     <div style="margin-right: 15%;">
                         @Ajax.ActionLink("提交", "findError", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                         {
                             HttpMethod = "Post",
                             OnComplete = "writeError(" + @ID + ")",
-                            OnSuccess = "findErrorAlert(data)"
+                            OnSuccess = "findErrorAlert(data)",
+                            
                         }, new { @class = "button button-flat-primary", style = "margin-top:10px;float:right;" })
                         <a onclick="hideAll(@ID)" style="margin-top: 15px; margin-right: 20px; float: right; cursor: pointer; text-decoration: none; font-family: 微软雅黑; font-size: 15px; ">取消</a>
                     </div>
