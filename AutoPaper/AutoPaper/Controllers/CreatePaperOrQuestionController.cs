@@ -64,11 +64,11 @@ namespace AutoPaper.Controllers
         }
         public string getAnswer(int id)//答案
         {
-            return " ";
+            return "66666";
         }
-        public string findError(int id)//挑错
+        public JsonResult findError(int id)//挑错
         {
-            return "已将您的消息发送给本题目的上传者" + "";
+            return Json("已将您的消息发送给本题目的上传者 " + "孙志人");
         }
         public ActionResult dealwithDoc()//处理上传的文档，解析并发回前端
         {

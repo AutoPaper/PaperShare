@@ -1,4 +1,4 @@
-﻿<div id="search-question">
+﻿<div id="paper-question">
     <div id="choice-question">
         <div style="width: 20%; height: 40px; background-color: #c1f0c1; margin-left: 40%; clear: both; ">
             <h3 style="font-family: 微软雅黑; margin-top: 6px; margin-left: 10px; float: left;">选 择 题</h3>
@@ -7,7 +7,7 @@
         @foreach (var choice_question in ViewBag.choiceQuestion)
         {
             int ID = choice_question.ID;
-            string teacherName = choice_question.teacherName;
+            string teacherName = "孙志人";//choice_question.teacherName;
             string hardness;
             int difficulty = choice_question.difficulty;
             switch (difficulty)
@@ -54,6 +54,7 @@
         @foreach (var blank_question in ViewBag.blankQuestion)
         {
             int ID = blank_question.ID;
+            string teacherName = "孙志人";//choice_question.teacherName;
             string hardness;
             int difficulty = blank_question.difficulty;
             switch (difficulty)
@@ -67,7 +68,7 @@
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：填空题</p>
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
-                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">更新时间：2014/11/11</p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">2014/11/11 by @teacherName</p>
             </div>
             <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
                 @blank_question.content
@@ -100,6 +101,7 @@
         @foreach (var judge_question in ViewBag.judgeQuestion)
         {
             int ID = judge_question.ID;
+            string teacherName = "孙志人";//choice_question.teacherName;
             string hardness;
             int difficulty = judge_question.difficulty;
             switch (difficulty)
@@ -113,7 +115,7 @@
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：判断题</p>
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
-                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">更新时间：2014/11/11</p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">2014/11/11 by @teacherName</p>
             </div>
             <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
                 @judge_question.content
@@ -146,6 +148,7 @@
         @foreach (var integrated_question in ViewBag.integratedQuestion)
         {
             int ID = integrated_question.ID;
+            string teacherName = "孙志人";//choice_question.teacherName;
             string hardness;
             int difficulty = integrated_question.difficulty;
             switch (difficulty)
@@ -159,7 +162,7 @@
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：综合题</p>
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
-                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">更新时间：2014/11/11</p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">2014/11/11 by @teacherName</p>
             </div>
             <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
                 @integrated_question.content
