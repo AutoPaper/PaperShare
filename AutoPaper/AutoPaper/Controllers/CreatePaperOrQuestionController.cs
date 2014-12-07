@@ -10,6 +10,7 @@ using AutoPaper.Models;
 using System.IO;
 using System.Text;
 
+
 namespace AutoPaper.Controllers
 {
     public class CreatePaperOrQuestionController : Controller
@@ -364,10 +365,9 @@ namespace AutoPaper.Controllers
         {
             uploadNum = 0;
             string data = "";
-            foreach (string upload in Request.Files)
-            {
-
-                Stream fileStream = Request.Files[upload].InputStream;
+            Stream fileStream = Request.Files["upload-doc"].InputStream;
+           
+            //    Stream fileStream = Request.Files[upload].InputStream;
 
                 /*     string fileName = Path.GetFileName(Request.Files[upload].FileName);
                      int fileLength = Request.Files[upload].ContentLength;
@@ -380,30 +380,31 @@ namespace AutoPaper.Controllers
                      StreamReader sr = new StreamReader(path, Encoding.Unicode);
                      //将数据存入data中 */
 
-                StreamReader sr = new StreamReader(fileStream, Encoding.Unicode);
+                StreamReader sr = new StreamReader(fileStream, Encoding.UTF8);
                 data = sr.ReadToEnd();
 
 
-            }
+            
 
             List<string> questionList = new List<string>();
             int start = 0, end = 0;
-            data.Replace("\\n\\d+\\.", "@@@");
+            data.Replace("\\r\\n\\d+\\.", "@@@");
+            
             start = KMPMatch(data, "@@@", start) + 1;
             while (end < data.Length)
             {
                 end = KMPMatch(data, "@@@", start) - 3;
-                if (end == -1)
-                    end = data.Length - 1;
+                if (end == -4)
+                    end = data.Length;
                 string t_question = "";
-                t_question = data.Substring(start, end);
+                t_question = data.Substring(start-1, end-start+1);
                 questionList.Add(t_question);
                 uploadNum++;
                 start = end + 4;
             }
             ViewBag.questionList = questionList;
             ViewBag.isUpload = "true";
-            return PartialView("_uploadPartial");
+            return View("Default");
         }
         public bool docSave()//文档保存成功
         {
@@ -472,7 +473,7 @@ namespace AutoPaper.Controllers
             next[0] = -1;
             while (j < T.Length - 1)
             {
-                if (k == -1 || T[j] == T[k])
+                if (k == -1 || T.Take(j) == T.Take(k))
                 {
                     j++;
                     k++;

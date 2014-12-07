@@ -47,14 +47,14 @@
     <div style="width: 300px; height: 75px; background-color: #fccc8a; text-align: center; margin-top: 20px; margin-right: 0px; float: right; ">
         <h2 style="font-family: 微软雅黑; ">上  传  试  卷</h2>
     </div>
-    @using (Ajax.BeginForm("Default", "CreatePaperOrQuestion", new AjaxOptions
+    @using (Ajax.BeginForm("dealwithDoc", "CreatePaperOrQuestion",null, new AjaxOptions
     {
         HttpMethod = "Post",
-        UpdateTargetId = "upload-content",
+        UpdateTargetId = "upload-question",
         InsertionMode = InsertionMode.Replace
-    }))
+    }, new { enctype = "multipart/form-data" }))
     {
-        <div class="create-paper-col" style="height: auto; background-color: #b9b9b9; margin-top: 80px; border-top-left-radius: 10px;border-top-right-radius: 10px;">
+        <div class="create-paper-col" style="height: auto; background-color: #b9b9b9; margin-top: 80px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
             @if (ViewBag.isUpload == "false")
             {
                 <h3 style="font-family: 微软雅黑; margin-top: 20px; margin-bottom: 20px; float: left;">请点击下方按钮以上传您的试卷</h3>
@@ -73,6 +73,7 @@
     }
     @Html.Partial("_uploadPartial")
 </div>
+
 <script type="text/javascript">
     function switchToUpload() {
         $("#assemble-content").toggle(400);
