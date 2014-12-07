@@ -15,7 +15,7 @@ namespace AutoPaper.Controllers
     public class CreatePaperOrQuestionController : Controller
     {
         private PaperShareDBContext db = new PaperShareDBContext();
-
+        private int uploadNum = 0;
         public class Question
         {
             public int ID { get; set; }
@@ -123,7 +123,9 @@ namespace AutoPaper.Controllers
                 t_qestion.teacherName = t_q.name;
                 integratedQuestion.Add(t_qestion);
             }
-            ViewBag.integratedQuestion = integratedQuestion;           
+            ViewBag.integratedQuestion = integratedQuestion;
+
+            ViewBag.isUpload = "false";
             return View();
         }
         public ActionResult getQuestion()
@@ -274,20 +276,20 @@ namespace AutoPaper.Controllers
 
             string message = "";
             //查找user_table表，找到该上传者
-            if(teacherId.Length>0)
-            { 
-               int t_teacherID = teacherId[0];
-               var teacherName = ((from o in db.user_table
-                                where o.ID == t_teacherID
-                                select o.name)).ToArray<string>();
-               if (teacherName.Length > 0)
-                   message = "已将您的消息发送给本题目的上传者" + teacherName[0];
-               else
-               {
-                   message = "未找到本题上传者";
-                   return Json(message);
-               }
-             }
+            if (teacherId.Length > 0)
+            {
+                int t_teacherID = teacherId[0];
+                var teacherName = ((from o in db.user_table
+                                    where o.ID == t_teacherID
+                                    select o.name)).ToArray<string>();
+                if (teacherName.Length > 0)
+                    message = "已将您的消息发送给本题目的上传者" + teacherName[0];
+                else
+                {
+                    message = "未找到本题上传者";
+                    return Json(message);
+                }
+            }
             else
             {
                 message = "未找到本题上传者";
@@ -308,7 +310,7 @@ namespace AutoPaper.Controllers
             notices t_notices = new notices();
             t_notices.userID = teacherId[0];
             t_notices.noticeType = 0;
-            t_notices.content = t_content;
+            t_notices.content = fromID.ToString() + t_content;
 
             db.SaveChanges();
 
@@ -316,23 +318,36 @@ namespace AutoPaper.Controllers
             return Json(message);
         }
 
+        public ActionResult GetMyPaperList(int id)
+        {
+            int userID = Convert.ToInt32(Request.Cookies["userID"].Value);
+            var paperList = (from a in db.paper_table
+                             join b in db.PT_table
+                             on a.ID equals b.paperID
+                             where b.teacherID == userID
+                             select a).ToList<papers>();
+            ViewBag.paperList = paperList;
+            return PartialView("*******");
+        }
+
         public bool addToPaper(int id)
         {
-   /*         //获得该题上传者id
-            var teacherId = ((from o in db.question_table
-                              where o.ID == id
-                              select o.teacherID)).ToArray<int>();
-            if (teacherId.Length > 0)
+            //获得试卷id
+            var paperId = (from o in db.paper_table
+                           where o.name == Request.Form["*****"]
+                           select o.ID).ToArray<int>();
+
+            if (paperId.Length > 0)
             {
                 //更新数据库
                 PQ t_PQ = new PQ();
-                t_PQ.paperID = teacherId[0];
+                t_PQ.paperID = paperId[0];
                 t_PQ.questionID = id;
                 db.PQ_table.Add(t_PQ);
                 db.SaveChanges();
                 return true;
             }
-            else*/
+            else
                 return false;
         }
         public bool collectQuestion(int id)//收藏试题
@@ -347,66 +362,86 @@ namespace AutoPaper.Controllers
         }
         public ActionResult dealwithDoc()//处理上传的文档，解析并发回前端
         {
+            uploadNum = 0;
             string data = "";
             foreach (string upload in Request.Files)
             {
 
                 Stream fileStream = Request.Files[upload].InputStream;
-                //              string mimeType = Request.Files[upload].ContentType;
-                string fileName = Path.GetFileName(Request.Files[upload].FileName);
-                int fileLength = Request.Files[upload].ContentLength;
-                //本地存放路径
-                string path = AppDomain.CurrentDomain.BaseDirectory + "uploads/";
-                //将文件已文件名filename存放在path路径中
-                Request.Files[upload].SaveAs(Path.Combine(path, fileName));
 
-                //从本地读取doc文件
-                StreamReader sr = new StreamReader(path, Encoding.Unicode);
-                //将数据存入data中
+                /*     string fileName = Path.GetFileName(Request.Files[upload].FileName);
+                     int fileLength = Request.Files[upload].ContentLength;
+                     //本地存放路径
+                     string path = AppDomain.CurrentDomain.BaseDirectory + "uploads/";
+                     //将文件以文件名filename存放在path路径中
+                     Request.Files[upload].SaveAs(Path.Combine(path, fileName));
+
+                     //从本地读取doc文件
+                     StreamReader sr = new StreamReader(path, Encoding.Unicode);
+                     //将数据存入data中 */
+
+                StreamReader sr = new StreamReader(fileStream, Encoding.Unicode);
                 data = sr.ReadToEnd();
 
-                /*      //将doc中的数据存放在byte[]中
-                      byte[] fileData = new byte[fileLength];
-                
-                      fileStream.Read(fileData, 0, fileLength);*/
+
             }
 
-            List<question> questionList = new List<question>();
-
-
+            List<string> questionList = new List<string>();
             int start = 0, end = 0;
             data.Replace("\\n\\d+\\.", "@@@");
             start = KMPMatch(data, "@@@", start) + 1;
             while (end < data.Length)
-            {              
+            {
                 end = KMPMatch(data, "@@@", start) - 3;
                 if (end == -1)
-                    break;
-                question t_question = new question();
-                t_question.content = data.Substring(start, end);
+                    end = data.Length - 1;
+                string t_question = "";
+                t_question = data.Substring(start, end);
                 questionList.Add(t_question);
+                uploadNum++;
                 start = end + 4;
             }
             ViewBag.questionList = questionList;
+            ViewBag.isUpload = "true";
             return PartialView("_uploadPartial");
         }
         public bool docSave()//文档保存成功
         {
-
-            question t_question = new question();
-            t_question.questionType = Convert.ToInt32(Request.Form["****"]);
-            t_question.answer = Request.Form["****"];
-            t_question.teacherID = Convert.ToInt32(Request.Cookies["userID"].Value);
-            t_question.subject = Request.Form["****"];
-            t_question.difficulty = Convert.ToInt32(Request.Form["****"]);
-            t_question.citationCount = 0;
-            t_question.updateTime = DateTime.Now;
-            db.question_table.Add(t_question);
+            if (uploadNum <= 0)
+                return false;
+            for (int i = 0; i < uploadNum; i++)
+            {
+                question t_question = new question();
+                t_question.teacherID = Convert.ToInt32(Request.Cookies["userID"].Value);
+                t_question.subject = Request.Form["subject-" + i.ToString()];
+                t_question.content = Request.Form["content-" + i.ToString()];
+                t_question.answer = Request.Form["answer-" + i.ToString()];
+                string str = Request.Form["questionType-" + i.ToString()];
+                if (str == "选择题")
+                    t_question.questionType = 0;
+                else if (str == "填空题")
+                    t_question.questionType = 1;
+                else if (str == "判断题")
+                    t_question.questionType = 2;
+                else if (str == "综合题")
+                    t_question.questionType = 3;
+                str = Request.Form["difficulty-" + i.ToString()];
+                if (str == "简单")
+                    t_question.difficulty = 1;
+                else if (str == "一般")
+                    t_question.difficulty = 2;
+                else if (str == "困难")
+                    t_question.difficulty = 3;
+                t_question.citationCount = 0;
+                t_question.updateTime = DateTime.Now;
+                db.question_table.Add(t_question);
+                db.SaveChanges();
+            }
             return true;
         }
 
 
-    
+
         int KMPMatch(string s, string p, int start)
         {
             int[] next = new int[100];

@@ -7,21 +7,23 @@
         @foreach (var choice_question in ViewBag.choiceQuestion)
         {
             int ID = choice_question.ID;
-            string teacherName = choice_question.teacherName;//choice_question.teacherName;
+            string teacherName = choice_question.teacherName;
+            int citationCount = choice_question.citationCount;
+            string time = choice_question.updateTime.ToShortDateString();
             string hardness;
             int difficulty = choice_question.difficulty;
             switch (difficulty)
             {
                 case 1: hardness = "容易"; break;
                 case 2: hardness = "一般"; break;
-                case 3: hardness = "难"; break;
+                case 3: hardness = "困难"; break;
                 default: hardness = "待添加"; break;
             }
             <div class="create-paper-col" style="height: 35px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 0px;  ">
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：选择题</p>
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
-                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
-                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">2014/11/11 by @teacherName</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">@citationCount</span></p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">@time by @teacherName</p>
             </div>
             <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
                 @choice_question.content
@@ -46,7 +48,7 @@
                     OnSuccess = "collectQuestionAlert()"
                 }, new { @class = "question-button", style = "text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; " })
                 <div id="findError-@ID" style="display: none; margin-top: 20px;">
-                    <textarea name="errorContent" class=" col-md-offset-1 form-control" rows="3" placeholder="您觉得哪里有问题就写下来吧"></textarea>
+                    <textarea id="errorContent" name="errorContent" class=" col-md-offset-1 form-control" rows="3" placeholder="您觉得哪里有问题就写下来吧"></textarea>
                     <div style="margin-right: 15%;">
                         @Ajax.ActionLink("提交", "findError", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                         {
