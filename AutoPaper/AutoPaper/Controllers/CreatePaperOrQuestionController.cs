@@ -375,7 +375,7 @@ namespace AutoPaper.Controllers
 
 
             int start = 0, end = 0;
-            data.Replace("_//d+.", "@@@");
+            data.Replace("\\n\\d+\\.", "@@@");
             start = KMPMatch(data, "@@@", start) + 1;
             while (end < data.Length)
             {              
