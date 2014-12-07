@@ -16,51 +16,239 @@ namespace AutoPaper.Controllers
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
+        public class Question
+        {
+            public int ID { get; set; }
+            public int teacherID { get; set; }
+            public string subject { get; set; }
+            public string content { get; set; }
+            public string answer { get; set; }
+            public int questionType { get; set; }
+            public int difficulty { get; set; }
+            public int citationCount { get; set; }
+            public DateTime updateTime { get; set; }
+            public string teacherName { get; set; }
+        }
         public ActionResult Default()
         {
-            var choiceQuestion = ((from o in db.question_table
-                                   where o.questionType == 1
-                                   orderby o.citationCount
-                                   select o).Take(2)).ToList<question>();
+
+            var t_choiceQuestion = (from a in db.question_table
+                                    join b in db.user_table
+                                    on a.teacherID equals b.ID
+                                    where a.questionType == 1
+                                    orderby a.citationCount
+                                    select new { a, b.name }).Take(2).ToList();
+            List<Question> choiceQuestion = new List<Question>();
+            foreach (var t_q in t_choiceQuestion)
+            {
+                Question t_qestion = new Question();
+                t_qestion.ID = t_q.a.ID;
+                t_qestion.teacherID = t_q.a.teacherID;
+                t_qestion.subject = t_q.a.subject;
+                t_qestion.content = t_q.a.content;
+                t_qestion.answer = t_q.a.answer;
+                t_qestion.questionType = t_q.a.questionType;
+                t_qestion.difficulty = t_q.a.difficulty;
+                t_qestion.citationCount = t_q.a.citationCount;
+                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.teacherName = t_q.name;
+                choiceQuestion.Add(t_qestion);
+            }
             ViewBag.choiceQuestion = choiceQuestion;
-            var blankQuestion = ((from o in db.question_table
-                                  where o.questionType == 2
-                                  orderby o.citationCount
-                                  select o).Take(2)).ToList<question>();
+            var t_blankQuestion = (from a in db.question_table
+                                   join b in db.user_table
+                                   on a.teacherID equals b.ID
+                                   where a.questionType == 2
+                                   orderby a.citationCount
+                                   select new { a, b.name }).Take(2).ToList();
+            List<Question> blankQuestion = new List<Question>();
+            foreach (var t_q in t_blankQuestion)
+            {
+                Question t_qestion = new Question();
+                t_qestion.ID = t_q.a.ID;
+                t_qestion.teacherID = t_q.a.teacherID;
+                t_qestion.subject = t_q.a.subject;
+                t_qestion.content = t_q.a.content;
+                t_qestion.answer = t_q.a.answer;
+                t_qestion.questionType = t_q.a.questionType;
+                t_qestion.difficulty = t_q.a.difficulty;
+                t_qestion.citationCount = t_q.a.citationCount;
+                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.teacherName = t_q.name;
+                blankQuestion.Add(t_qestion);
+            }
             ViewBag.blankQuestion = blankQuestion;
-            var judgeQuestion = ((from o in db.question_table
-                                  where o.questionType == 3
-                                  orderby o.citationCount
-                                  select o).Take(2)).ToList<question>();
+            var t_judgeQuestion = (from a in db.question_table
+                                   join b in db.user_table
+                                   on a.teacherID equals b.ID
+                                   where a.questionType == 3
+                                   orderby a.citationCount
+                                   select new { a, b.name }).Take(2).ToList();
+            List<Question> judgeQuestion = new List<Question>();
+            foreach (var t_q in t_judgeQuestion)
+            {
+                Question t_qestion = new Question();
+                t_qestion.ID = t_q.a.ID;
+                t_qestion.teacherID = t_q.a.teacherID;
+                t_qestion.subject = t_q.a.subject;
+                t_qestion.content = t_q.a.content;
+                t_qestion.answer = t_q.a.answer;
+                t_qestion.questionType = t_q.a.questionType;
+                t_qestion.difficulty = t_q.a.difficulty;
+                t_qestion.citationCount = t_q.a.citationCount;
+                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.teacherName = t_q.name;
+                judgeQuestion.Add(t_qestion);
+            }
             ViewBag.judgeQuestion = judgeQuestion;
-            var integratedQuestion = ((from o in db.question_table
-                                       where o.questionType == 4
-                                       orderby o.citationCount
-                                       select o).Take(2)).ToList<question>();
-            ViewBag.integratedQuestion = integratedQuestion;
+            var t_integratedQuestion = (from a in db.question_table
+                                        join b in db.user_table
+                                        on a.teacherID equals b.ID
+                                        where a.questionType == 4
+                                        orderby a.citationCount
+                                        select new { a, b.name }).Take(2).ToList();
+            List<Question> integratedQuestion = new List<Question>();
+            foreach (var t_q in t_integratedQuestion)
+            {
+                Question t_qestion = new Question();
+                t_qestion.ID = t_q.a.ID;
+                t_qestion.teacherID = t_q.a.teacherID;
+                t_qestion.subject = t_q.a.subject;
+                t_qestion.content = t_q.a.content;
+                t_qestion.answer = t_q.a.answer;
+                t_qestion.questionType = t_q.a.questionType;
+                t_qestion.difficulty = t_q.a.difficulty;
+                t_qestion.citationCount = t_q.a.citationCount;
+                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.teacherName = t_q.name;
+                integratedQuestion.Add(t_qestion);
+            }
+            ViewBag.integratedQuestion = integratedQuestion;           
             return View();
         }
         public ActionResult getQuestion()
         {
-            var choiceQuestion = ((from o in db.question_table
-                                   where o.questionType == 1
-                                   orderby o.citationCount
-                                   select o).Take(10)).ToList<question>();
+            string match = Request.Form["*****"];
+            var t_choiceQuestion = (from a in db.question_table
+                                    join d in db.user_table
+                                    on a.teacherID equals d.ID
+                                    where
+                                    (from b in db.QTags_table
+                                     where
+                                     (from c in db.tag_table
+                                      where KMPMatch(c.content, match, 0) != -1
+                                      select c.ID).Contains(b.tagID)
+                                     select b.questionID).Contains(a.ID) && a.questionType == 1
+                                    orderby a.citationCount
+                                    select new { a, d.name }).Take(10).ToList();
+
+            List<Question> choiceQuestion = new List<Question>();
+            foreach (var t_q in t_choiceQuestion)
+            {
+                Question t_qestion = new Question();
+                t_qestion.ID = t_q.a.ID;
+                t_qestion.teacherID = t_q.a.teacherID;
+                t_qestion.subject = t_q.a.subject;
+                t_qestion.content = t_q.a.content;
+                t_qestion.answer = t_q.a.answer;
+                t_qestion.questionType = t_q.a.questionType;
+                t_qestion.difficulty = t_q.a.difficulty;
+                t_qestion.citationCount = t_q.a.citationCount;
+                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.teacherName = t_q.name;
+                choiceQuestion.Add(t_qestion);
+            }
             ViewBag.choiceQuestion = choiceQuestion;
-            var blankQuestion = ((from o in db.question_table
-                                  where o.questionType == 2
-                                  orderby o.citationCount
-                                  select o).Take(10)).ToList<question>();
+
+            var t_blankQuestion = (from a in db.question_table
+                                   join d in db.user_table
+                                   on a.teacherID equals d.ID
+                                   where
+                                   (from b in db.QTags_table
+                                    where
+                                    (from c in db.tag_table
+                                     where KMPMatch(c.content, match, 0) != -1
+                                     select c.ID).Contains(b.tagID)
+                                    select b.questionID).Contains(a.ID) && a.questionType == 2
+                                   orderby a.citationCount
+                                   select new { a, d.name }).Take(10).ToList();
+
+            List<Question> blankQuestion = new List<Question>();
+            foreach (var t_q in t_blankQuestion)
+            {
+                Question t_qestion = new Question();
+                t_qestion.ID = t_q.a.ID;
+                t_qestion.teacherID = t_q.a.teacherID;
+                t_qestion.subject = t_q.a.subject;
+                t_qestion.content = t_q.a.content;
+                t_qestion.answer = t_q.a.answer;
+                t_qestion.questionType = t_q.a.questionType;
+                t_qestion.difficulty = t_q.a.difficulty;
+                t_qestion.citationCount = t_q.a.citationCount;
+                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.teacherName = t_q.name;
+                blankQuestion.Add(t_qestion);
+            }
             ViewBag.blankQuestion = blankQuestion;
-            var judgeQuestion = ((from o in db.question_table
-                                  where o.questionType == 3
-                                  orderby o.citationCount
-                                  select o).Take(10)).ToList<question>();
+            var t_judgeQuestion = (from a in db.question_table
+                                   join d in db.user_table
+                                   on a.teacherID equals d.ID
+                                   where
+                                   (from b in db.QTags_table
+                                    where
+                                    (from c in db.tag_table
+                                     where KMPMatch(c.content, match, 0) != -1
+                                     select c.ID).Contains(b.tagID)
+                                    select b.questionID).Contains(a.ID) && a.questionType == 3
+                                   orderby a.citationCount
+                                   select new { a, d.name }).Take(10).ToList();
+
+            List<Question> judgeQuestion = new List<Question>();
+            foreach (var t_q in t_judgeQuestion)
+            {
+                Question t_qestion = new Question();
+                t_qestion.ID = t_q.a.ID;
+                t_qestion.teacherID = t_q.a.teacherID;
+                t_qestion.subject = t_q.a.subject;
+                t_qestion.content = t_q.a.content;
+                t_qestion.answer = t_q.a.answer;
+                t_qestion.questionType = t_q.a.questionType;
+                t_qestion.difficulty = t_q.a.difficulty;
+                t_qestion.citationCount = t_q.a.citationCount;
+                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.teacherName = t_q.name;
+                judgeQuestion.Add(t_qestion);
+            }
             ViewBag.judgeQuestion = judgeQuestion;
-            var integratedQuestion = ((from o in db.question_table
-                                       where o.questionType == 4
-                                       orderby o.citationCount
-                                       select o).Take(10)).ToList<question>();
+            var t_integratedQuestion = (from a in db.question_table
+                                        join d in db.user_table
+                                        on a.teacherID equals d.ID
+                                        where
+                                        (from b in db.QTags_table
+                                         where
+                                         (from c in db.tag_table
+                                          where KMPMatch(c.content, match, 0) != -1
+                                          select c.ID).Contains(b.tagID)
+                                         select b.questionID).Contains(a.ID) && a.questionType == 4
+                                        orderby a.citationCount
+                                        select new { a, d.name }).Take(10).ToList();
+
+            List<Question> integratedQuestion = new List<Question>();
+            foreach (var t_q in t_integratedQuestion)
+            {
+                Question t_qestion = new Question();
+                t_qestion.ID = t_q.a.ID;
+                t_qestion.teacherID = t_q.a.teacherID;
+                t_qestion.subject = t_q.a.subject;
+                t_qestion.content = t_q.a.content;
+                t_qestion.answer = t_q.a.answer;
+                t_qestion.questionType = t_q.a.questionType;
+                t_qestion.difficulty = t_q.a.difficulty;
+                t_qestion.citationCount = t_q.a.citationCount;
+                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.teacherName = t_q.name;
+                integratedQuestion.Add(t_qestion);
+            }
             ViewBag.integratedQuestion = integratedQuestion;
             return PartialView("_searchPartial");
         }
@@ -71,7 +259,10 @@ namespace AutoPaper.Controllers
             var answer = ((from o in db.question_table
                            where o.ID == id
                            select o.answer)).ToArray<string>();
-            return answer[0];
+            if (answer.Length > 0)
+                return answer[0];
+            else
+                return "未找到答案";
         }
 
         public JsonResult findError(int id)//挑错
@@ -81,45 +272,77 @@ namespace AutoPaper.Controllers
                               where o.ID == id
                               select o.teacherID)).ToArray<int>();
 
-
+            string message = "";
             //查找user_table表，找到该上传者
-            int t_teacherID = teacherId[0];
-            var teacherName = ((from o in db.user_table
+            if(teacherId.Length>0)
+            { 
+               int t_teacherID = teacherId[0];
+               var teacherName = ((from o in db.user_table
                                 where o.ID == t_teacherID
                                 select o.name)).ToArray<string>();
-
+               if (teacherName.Length > 0)
+                   message = "已将您的消息发送给本题目的上传者" + teacherName[0];
+               else
+               {
+                   message = "未找到本题上传者";
+                   return Json(message);
+               }
+             }
+            else
+            {
+                message = "未找到本题上传者";
+                return Json(message);
+            }
             //获得纠错用户id
             int fromID = Convert.ToInt32(Request.Cookies["userID"].Value);
             var t_content = Request.Form["errorContent"];
             //更新数据库
+            //errorHistory
             errorHistory t_errorHistory = new errorHistory();
             t_errorHistory.fromID = fromID;
             t_errorHistory.toID = teacherId[0];
             t_errorHistory.questionID = id;
             t_errorHistory.content = t_content;
             db.error_table.Add(t_errorHistory);
+            //notices
+            notices t_notices = new notices();
+            t_notices.userID = teacherId[0];
+            t_notices.noticeType = 0;
+            t_notices.content = t_content;
+
             db.SaveChanges();
 
             //返回结果
-            return Json("已将您的消息发送给本题目的上传者" + teacherName[0]);
+            return Json(message);
         }
 
         public bool addToPaper(int id)
         {
-            //获得该题上传者id
+   /*         //获得该题上传者id
             var teacherId = ((from o in db.question_table
                               where o.ID == id
                               select o.teacherID)).ToArray<int>();
-            //更新数据库
-            PQ t_PQ = new PQ();
-            t_PQ.paperID = teacherId[0];
-            t_PQ.questionID = id;
-            db.PQ_table.Add(t_PQ);
-            db.SaveChanges();
-            return true;
+            if (teacherId.Length > 0)
+            {
+                //更新数据库
+                PQ t_PQ = new PQ();
+                t_PQ.paperID = teacherId[0];
+                t_PQ.questionID = id;
+                db.PQ_table.Add(t_PQ);
+                db.SaveChanges();
+                return true;
+            }
+            else*/
+                return false;
         }
-        public bool collectQuestion()
+        public bool collectQuestion(int id)//收藏试题
         {
+            int ID = Convert.ToInt32(Request.Cookies["userID"].Value);
+            QU t_pu = new QU();
+            t_pu.userID = ID;
+            t_pu.questionID = id;
+            db.QU_table.Add(t_pu);
+            db.SaveChanges();
             return true;
         }
         public ActionResult dealwithDoc()//处理上传的文档，解析并发回前端
@@ -139,27 +362,30 @@ namespace AutoPaper.Controllers
 
                 //从本地读取doc文件
                 StreamReader sr = new StreamReader(path, Encoding.Unicode);
+                //将数据存入data中
                 data = sr.ReadToEnd();
 
                 /*      //将doc中的数据存放在byte[]中
                       byte[] fileData = new byte[fileLength];
                 
                       fileStream.Read(fileData, 0, fileLength);*/
-
             }
 
             List<question> questionList = new List<question>();
 
 
-            int start = 3, end = 0; string p = "<c>";
+            int start = 0, end = 0;
+            data.Replace("_//d+.", "@@@");
+            start = KMPMatch(data, "@@@", start) + 1;
             while (end < data.Length)
-            {
-
-                end = KMPMatch(data, p, start);
+            {              
+                end = KMPMatch(data, "@@@", start) - 3;
+                if (end == -1)
+                    break;
                 question t_question = new question();
-                t_question.content = data.Substring(start, end - start - 3);
+                t_question.content = data.Substring(start, end);
                 questionList.Add(t_question);
-                start = end + 1;
+                start = end + 4;
             }
             ViewBag.questionList = questionList;
             return PartialView("_uploadPartial");
@@ -179,6 +405,8 @@ namespace AutoPaper.Controllers
             return true;
         }
 
+
+    
         int KMPMatch(string s, string p, int start)
         {
             int[] next = new int[100];

@@ -7,7 +7,7 @@
         @foreach (var choice_question in ViewBag.choiceQuestion)
         {
             int ID = choice_question.ID;
-            string teacherName = "孙志人";//choice_question.teacherName;
+            string teacherName = choice_question.teacherName;//choice_question.teacherName;
             string hardness;
             int difficulty = choice_question.difficulty;
             switch (difficulty)
@@ -73,7 +73,7 @@
         @foreach (var blank_question in ViewBag.blankQuestion)
         {
             int ID = blank_question.ID;
-            string teacherName = "孙志人";//choice_question.teacherName;
+            string teacherName = blank_question.teacherName;//choice_question.teacherName;
             string hardness;
             int difficulty = blank_question.difficulty;
             switch (difficulty)
@@ -120,7 +120,7 @@
         @foreach (var judge_question in ViewBag.judgeQuestion)
         {
             int ID = judge_question.ID;
-            string teacherName = "孙志人";//choice_question.teacherName;
+            string teacherName = judge_question.teacherName;//choice_question.teacherName;
             string hardness;
             int difficulty = judge_question.difficulty;
             switch (difficulty)
@@ -167,7 +167,7 @@
         @foreach (var integrated_question in ViewBag.integratedQuestion)
         {
             int ID = integrated_question.ID;
-            string teacherName = "孙志人";//choice_question.teacherName;
+            string teacherName = integrated_question.teacherName;//choice_question.teacherName;
             string hardness;
             int difficulty = integrated_question.difficulty;
             switch (difficulty)
