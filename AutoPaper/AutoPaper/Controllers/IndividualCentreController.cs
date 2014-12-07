@@ -71,7 +71,7 @@ namespace AutoPaper.Controllers
             int userID = Convert.ToInt32(Request.Cookies["userID"].Value);
             //找出收藏试卷id
             var paperList = (from a in db.paper_table
-                             join b in db.PU_table
+                             join b in db.PU_Transcation_table
                              on a.ID equals b.paperID
                              where b.userID == userID && b.logAddr == null
                              select a).ToList<papers>();

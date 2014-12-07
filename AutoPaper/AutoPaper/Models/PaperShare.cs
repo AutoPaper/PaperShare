@@ -76,6 +76,15 @@ namespace AutoPaper.Models
         [Key]
         [Column(Order = 1)]
         public int paperID { get; set; }
+    }
+    public class PU_Transcation
+    {
+        [Key]
+        [Column(Order = 0)]
+        public int userID { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        public int paperID { get; set; }
         public bool hasSHA { get; set; }
         public string logAddr { get; set; }
         public DateTime logTime { get; set; }
@@ -144,6 +153,7 @@ namespace AutoPaper.Models
         public DbSet<QU> QU_table { get; set; }
         public DbSet<papers> paper_table { get; set; }
         public DbSet<PU> PU_table { get; set; }
+        public DbSet<PU_Transcation> PU_Transcation_table { get; set; }
         public DbSet<PT> PT_table { get; set; }
         public DbSet<PQ> PQ_table { get; set; }
         public DbSet<tags> tag_table { get; set; }

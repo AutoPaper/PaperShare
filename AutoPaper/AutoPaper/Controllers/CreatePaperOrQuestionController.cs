@@ -128,7 +128,7 @@ namespace AutoPaper.Controllers
         }
         public ActionResult getQuestion()
         {
-            string match = Request.Form["*****"];
+            string match = Request.Form["search-input"];
             var t_choiceQuestion = (from a in db.question_table
                                     join d in db.user_table
                                     on a.teacherID equals d.ID

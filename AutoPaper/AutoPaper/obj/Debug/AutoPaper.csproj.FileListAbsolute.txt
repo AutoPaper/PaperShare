@@ -151,3 +151,4 @@ E:\软件工程\code\PaperShare\AutoPaper\AutoPaper\bin\zh-Hans\Microsoft.Owin.S
 E:\软件工程\code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.csprojResolveAssemblyReference.cache
 E:\软件工程\code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.dll
 E:\软件工程\code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.pdb
+F:\南京师范大学\计算机学院\软件工程\Code\PaperShare\AutoPaper\AutoPaper\obj\Debug\AutoPaper.csprojResolveAssemblyReference.cache
