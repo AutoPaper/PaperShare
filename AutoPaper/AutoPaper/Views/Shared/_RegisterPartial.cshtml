@@ -7,10 +7,11 @@
         {
             HttpMethod = "Post",
             UpdateTargetId = "wrongRegister",
-            InsertionMode = InsertionMode.Replace
+            InsertionMode = InsertionMode.Replace,
+            OnSuccess = "reloadRegister()"
         }, new { @class = "form-horizontal" }))
         {
-            <div class="col-sm-offset-1" id="wrongRegisiter" style="padding-left: 3px; margin-bottom: 5px; color: red; font-family: 微软雅黑; font-size: 15px; "></div>
+            <div class="col-sm-offset-1" id="wrongRegister" style="padding-left: 3px; margin-bottom: 5px; color: red; font-family: 微软雅黑; font-size: 15px; "></div>
             <form class="form-horizontal" role="form">
                 <div class="form-group">
                     <div class="col-sm-offset-1 col-sm-10">
@@ -53,3 +54,9 @@
         }
     </div>
 </div>
+<script type="text/javascript">
+    function reloadRegister() {
+        if ($("#wrongRegister").html() == "")
+            window.location.reload();
+    }
+</script>

@@ -18,7 +18,7 @@
     <div style="width: 300px; height: 75px; background-color: #c1f0c1; text-align: center; margin-top: 20px; margin-left: 0px; ">
         <h2 style="font-family: 微软雅黑; padding-top: 20px; ">试  题  精  选</h2>
     </div>
-    @using (Ajax.BeginForm("getQuestion", "CreatePaperOrQuestion", new AjaxOptions
+    @using(Ajax.BeginForm("getQuestion", "CreatePaperOrQuestion", new AjaxOptions
     {
         HttpMethod = "Post",
         UpdateTargetId = "search-question",
@@ -26,7 +26,7 @@
     }))
     {
         <div class="create-paper-col" style="height: auto; margin-top: 80px; padding-left: 0px; margin-bottom: 20px;">
-            <input type="text" id="search-input" class="col-md-1 form-control" placeholder="您想找什么样的题目呢？" />
+            <input type="text" id="search-input" name="search-input" class="col-md-1 form-control" placeholder="您想找什么样的题目呢？" />
             <button type="submit" class="button button-flat-primary" style="margin-left: 0px;">搜 索</button>
         </div>
     }
@@ -47,31 +47,35 @@
     <div style="width: 300px; height: 75px; background-color: #fccc8a; text-align: center; margin-top: 20px; margin-right: 0px; float: right; ">
         <h2 style="font-family: 微软雅黑; ">上  传  试  卷</h2>
     </div>
-    @using (Ajax.BeginForm("dealwithDoc", "CreatePaperOrQuestion",null, new AjaxOptions
-    {
-        HttpMethod = "Post",
-        UpdateTargetId = "upload-question",
-        InsertionMode = InsertionMode.Replace
-    }, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("dealwithDoc", "CreatePaperOrQuestion", FormMethod.Post, new { target = "hidden-frame", enctype = "multipart/form-data" }))
     {
         <div class="create-paper-col" style="height: auto; background-color: #b9b9b9; margin-top: 80px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            @if (ViewBag.isUpload == "false")
+            @if (ViewBag.uploadDone == "false")
             {
                 <h3 style="font-family: 微软雅黑; margin-top: 20px; margin-bottom: 20px; float: left;">请点击下方按钮以上传您的试卷</h3>
             }
-            else if (ViewBag.isUpload == "true")
+            else if (ViewBag.uploadDone == "true")
             {
                 <h3 style="font-family: 微软雅黑; margin-top: 20px; margin-bottom: 20px; float: left;">
-                    试卷已成功上传，您可以去<a>个人中心</a>查看或继续上传试卷
+                    试卷已成功上传，您可以去<a style="text-decoration: none; cursor: pointer;">个人中心</a>查看或继续上传试卷
                 </h3>
             }
         </div>
-        <div class="create-paper-col" style="height: auto; background-color: #e6e6e6; margin-bottom: 80px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; ">
+        <div class="create-paper-col" style="height: auto; background-color: #e6e6e6; margin-bottom: 40px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; ">
             <input type="file" id="upload-doc" name="upload-doc" class="col-md-5" style="margin-top: 40px; margin-bottom: 40px; padding-top: 5px;">
-            <button type="submit" class=" col-md-2 col-md-offset-4 button button-flat-highlight" style="margin-top: 40px; margin-bottom: 20px;">确 认</button>
+            <button id="submit-doc" onclick="loadPaper()" type="submit" class=" col-md-2 col-md-offset-4 button button-flat-highlight" style="margin-top: 40px; margin-bottom: 20px;">确 认</button>
+            @Ajax.ActionLink("识别成功点击展开", "returnDoc", "CreatePaperOrQuestion", null, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "upload-question",
+            }, new { id = "ajaxDoc", @class = "button button-flat-highlight col-md-offset-2 col-md-4", style = "display:none; margin-top: 40px; margin-bottom: 20px;" })
         </div>
     }
-    @Html.Partial("_uploadPartial")
+    <iframe id="hidden-frame" name="hidden-frame" style="display: none;"></iframe>
+    <div id="upload-question">
+        @Html.Partial("_uploadPartial")
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -97,3 +101,10 @@
         $("#assemble-extend > img,#upload-extend > img").css("opacity", 0.3);
     }
 </script>@*选题与上传之间的切换*@
+<script type="text/javascript">
+    function loadPaper() {
+        setTimeout(function () { }, 3000);
+        $("#submit-doc").css("display", "none");
+        $("#ajaxDoc").css("display", "block");
+    }
+</script>

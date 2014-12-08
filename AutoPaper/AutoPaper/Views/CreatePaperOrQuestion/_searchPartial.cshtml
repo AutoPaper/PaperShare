@@ -32,9 +32,9 @@
                 @Ajax.ActionLink("答案", "getAnswer", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
-                    InsertionMode = InsertionMode.InsertAfter,
+                    InsertionMode = InsertionMode.Replace,
                     UpdateTargetId = "answer-" + @ID,
-                    OnComplete = "showAnswer(" + @ID + ")"
+                    OnSuccess = "showAnswer(" + @ID + ")"
                 }, new { style = "font-family:微软雅黑; margin-right:10px; text-decoration:none" })
                 <a onclick="showErrorText(@ID)" style="font-family: 微软雅黑; margin-right: 10px; text-decoration: none; cursor: pointer; ">挑错</a>
                 @Ajax.ActionLink("收藏该题", "collectQuestion", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
@@ -42,7 +42,7 @@
                     HttpMethod = "Post",
                     OnSuccess = "collectQuestionAlert()"
                 }, new { @class = "question-button", style = "text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; " })
-                @Ajax.ActionLink("加入试卷", "collectQuestion", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
+                @Ajax.ActionLink("加入试卷", "GetMyPaperList", "CreatePaperOrQuestion", new { id = @ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     OnSuccess = "collectQuestionAlert()"

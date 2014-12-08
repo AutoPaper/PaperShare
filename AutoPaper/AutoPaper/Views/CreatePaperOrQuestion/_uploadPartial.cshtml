@@ -1,32 +1,76 @@
 ﻿@if (ViewBag.isUpload == "true")
 {
     int index = -1;
-    <div id="upload-question" style="padding-top: 20px; clear: both;">
-        @foreach (var question in ViewBag.questionList)
+    <div style="padding-top: 0px; clear: both;">
+        @using (Ajax.BeginForm("docSave", "Home", new { id = @index }, new AjaxOptions
         {
-            index++;
-            <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-top: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
-                @question
+            HttpMethod = "Post",
+            OnSuccess = "reloadUpload()"
+        }, new { @class = "form-horizontal" }))
+        {
+            <div class="create-paper-col">
+                <div class="form-group">
+                    <label for="inputEmail3" class="col-sm-2 control-label">试卷名</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="paper-name" name="paper-name" placeholder="您可以在此处输入试卷名">
+                    </div>
+                </div>
             </div>
-            <div class="create-paper-col" style="height: auto; background-color: #e6e6e6; margin-top: 0px; margin-bottom: 20px; ">
-                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：</p>
-                <select id="questionType-@index" style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">
-                    <option>选择题</option>
-                    <option>填空题</option>
-                    <option>判断题</option>
-                    <option>综合题</option>
-                </select>
-                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：</p>
-                <select id="difficulty-@index" style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">
-                    <option>简单</option>
-                    <option>一般</option>
-                    <option>困难</option>
-                </select>
-                <button class="question-button" style="text-decoration: none; float: right; margin-right: 25px; font-family: 微软雅黑; ">编辑答案</button>
-                <textarea id="answer-@index" name="answer-@index" class=" col-md-offset-1 form-control" style="display: none; margin-top: 20px;" rows="3" placeholder="您觉得哪里有问题就写下来吧"></textarea>
-            </div>
-            <div id="showDetail" class="create-paper-col" style="margin-top: 0px;  padding-bottom: 5px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+            foreach (var question in ViewBag.questionList)
+            {
+                index++;
+                <div class="create-paper-col" style=" margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-top: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                    @question
+                </div>
+                <div class="create-paper-col" style="height: auto; background-color: #e6e6e6; margin-top: 0px; margin-bottom: 20px; ">
+                    <p style="padding-top: 10px; float: left; margin-right: 5px; color: #a4a4a4; font-family: 微软雅黑;">题型：</p>
+                    <div class="col-md-2" style="padding-top: 5px; padding-bottom: 5px;">
+                        <select name="questionType-@index" style="padding-top: 7px; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">
+                            <option>选择题</option>
+                            <option>填空题</option>
+                            <option>判断题</option>
+                            <option>综合题</option>
+                        </select>
+                    </div>
+                    <p style="padding-top: 10px; float: left; margin-right: 5px; color: #a4a4a4; font-family: 微软雅黑;">难度：</p>
+                    <div class="col-md-2" style="padding-top: 5px; padding-bottom: 5px;">
+                        <select name="difficulty-@index" style="padding-top: 7px; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">
+                            <option>简单</option>
+                            <option>一般</option>
+                            <option>困难</option>
+                        </select>
+                    </div>
+                    <p style="padding-top: 10px; float: left; margin-right: 5px; color: #a4a4a4; font-family: 微软雅黑;">学科：</p>
+                    <div class="col-md-2" style="padding-top: 5px; padding-bottom: 5px;">
+                        <select name="subject-@index" style="padding-top: 7px; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">
+                            <option>数学</option>
+                            <option>物理</option>
+                            <option>化学</option>
+                        </select>
+                    </div>
+                    <button id="edit-answer-@index" onclick="ShowAnswer(@index)" class="question-button" style="margin-top: 7px;  float: left; margin-right: 5px; font-family: 微软雅黑; ">编辑答案</button>
+                    <div id="editAnswer-@index" class="create-paper-col" style="display: none; height: auto; margin-top: 0px; padding-bottom: 0px; border-bottom: solid 1px #e6e6e6; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
+                        <textarea id="answer-@index" name="answer-@index" class=" form-control" style="margin-left: 10px; margin-top: 10px; margin-bottom: 10px; " rows="3" placeholder="您可以在此处编辑答案"></textarea>
+                    </div>
+                </div>
+            }
+            <div class="create-paper-col">
+                <button type="submit" class="button button-flat-highlight col-md-offset-9">确认上传</button>
             </div>
         }
     </div>
 }
+<script type="text/javascript">
+    function ShowAnswer(id) {
+        $("#editAnswer-"+id).slideToggle(100);
+        if($("#edit-answer-"+id).val()=="编辑答案")
+            $("#edit-answer-"+id).val("收起");
+        else
+            $("#edit-answer-"+id).val("编辑答案");
+    }
+</script>
+<script type="text/javascript">
+    function reloadUpload() {
+        window.location.reload();
+    }
+</script>

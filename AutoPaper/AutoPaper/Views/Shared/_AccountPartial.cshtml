@@ -1,5 +1,4 @@
-﻿@using Microsoft.AspNet.Identity
-@if (Request.Cookies["userID"] != null)
+﻿@if (Request.Cookies["userID"] != null)
 {
     string userName = Request.Cookies["userName"].Value;
     if (Request.Cookies["userType"].Value == "2")
@@ -9,13 +8,13 @@
                 @userName <span class="caret"></span>
             </button>
             <ul id="userList" class="dropdown-menu" role="menu">
-                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">出试卷</a></li>
-                <li class="divider"></li>
                 <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">个人中心</a></li>
                 <li class="divider"></li>
                 <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">我的试卷</a></li>
                 <li class="divider"></li>
                 <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">我的收藏</a></li>
+                <li class="divider"></li>
+                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">退出登录</a></li>
             </ul>
         </div>
     }
@@ -34,7 +33,7 @@
                 <li class="divider"></li>
                 <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">我的收藏</a></li>
                 <li class="divider"></li>
-                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">注销账号</a></li>
+                <li><a href="#" style="font-family: 微软雅黑; font-size: 16px; text-align: center; ">退出登录</a></li>
             </ul>
         </div>
     }
