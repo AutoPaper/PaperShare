@@ -15,23 +15,88 @@ namespace AutoPaper.Controllers
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult searchResult()
         {
-            List<hotPaper> hotPapers = new List<hotPaper>();
-            var ids = (from o in db.PT_table
-                       orderby o.doneCount descending
-                       select o.paperID).Take(4);
+            string key = Request.Form["home-search"];
+            List<Paper> matchPapers = new List<Paper>();
+            var ids = (from c in db.paper_table
+                       where c.name.Contains(key)
+                       select c.ID).ToArray<int>();
             foreach (var id in ids)
             {
-                hotPaper hp = new hotPaper();
-                hp.paperName = (from o in db.paper_table
-                                where o.ID == id
-                                select o.name).ToString();
-                hp.teacher = (from c in db.user_table
-                              where (from o in db.PT_table
-                                     where o.paperID == id
-                                     select o.teacherID).Contains(c.ID)
-                              select c.name).ToString();
+                Paper hp = new Paper();
+                var paper = (from o in db.paper_table
+                             where o.ID == id
+                             select o).ToArray<papers>();
+                hp.paper = paper[0];
+                var user = (from c in db.user_table
+                            where (from o in db.PT_table
+                                   where o.paperID == id
+                                   select o.teacherID).Contains(c.ID)
+                            select c).ToArray<users>();
+                hp.teacher = user[0];
+                hp.paperTags = (from c in db.tag_table
+                                where (from o in db.PTags_table
+                                       where o.paperID == id
+                                       select o.tagID).Contains(c.ID)
+                                select c.content).ToList<string>();
+                matchPapers.Add(hp);
+            }
+            ViewBag.matchPapers = matchPapers;
+
+            List<Teacher> matchTeachers = new List<Teacher>();
+            var Ids = (from c in db.user_table
+                      where c.name.Contains(key) && c.role == 1
+                      select c.ID).ToArray<int>();
+            foreach (var Id in Ids)
+            {
+                Teacher ht = new Teacher();
+                var teacher = (from o in db.user_table
+                               where o.ID == Id
+                               select o).ToArray<users>();
+                ht.teacher = teacher[0];
+                List<nameADdonecount> Name_doneCount = new List<nameADdonecount>();
+                var pt = from o in db.PT_table
+                         where o.teacherID == Id
+                         orderby o.doneCount descending
+                         select o;
+                foreach (var p in pt)
+                {
+                    nameADdonecount ndc = new nameADdonecount();
+                    var paper = (from o in db.paper_table
+                                 where o.ID == p.paperID
+                                 select o).ToArray<papers>();
+                    ndc.paper = paper[0];
+                    ndc.doneCount = p.doneCount;
+                    Name_doneCount.Add(ndc);
+                }
+                ht.Name_doneCount = Name_doneCount;
+                matchTeachers.Add(ht);
+            }
+            ViewBag.matchTeachers = matchTeachers;
+            return View();
+        }
+
+        public ActionResult Index()
+        {
+            List<Paper> hotPapers = new List<Paper>();
+            var ids = (from o in db.PT_table
+                       orderby o.doneCount descending
+                       select o.paperID).Take(20);
+            foreach (var id in ids)
+            {
+                Paper hp = new Paper();
+                var paper = (from o in db.paper_table
+                             where o.ID == id
+                             select o).ToArray<papers>();
+                hp.paper = paper[0];
+                var user = (from c in db.user_table
+                            where (from o in db.PT_table
+                                   where o.paperID == id
+                                   select o.teacherID).Contains(c.ID)
+                            select c).ToArray<users>();
+                hp.teacher = user[0];
                 hp.paperTags = (from c in db.tag_table
                                 where (from o in db.PTags_table
                                        where o.paperID == id
@@ -44,16 +109,17 @@ namespace AutoPaper.Controllers
         }
         public ActionResult HotTeacher()
         {
-            List<hotTeacher> hotTeachers = new List<hotTeacher>();
+            List<Teacher> hotTeachers = new List<Teacher>();
             var ids = ((from o in db.PT_table
                         orderby o.doneCount descending
                         select o.teacherID).Distinct()).Take(4);
             foreach (var id in ids)
             {
-                hotTeacher ht = new hotTeacher();
-                ht.teacherName = (from o in db.user_table
-                                  where o.ID == id
-                                  select o.name).ToString();
+                Teacher ht = new Teacher();
+                var teacher = (from o in db.user_table
+                               where o.ID == id
+                               select o).ToArray<users>();
+                ht.teacher = teacher[0];
                 List<nameADdonecount> Name_doneCount = new List<nameADdonecount>();
                 var pt = from o in db.PT_table
                          where o.teacherID == id
@@ -62,9 +128,10 @@ namespace AutoPaper.Controllers
                 foreach (var p in pt)
                 {
                     nameADdonecount ndc = new nameADdonecount();
-                    ndc.paperName = (from o in db.paper_table
-                                     where o.ID == p.paperID
-                                     select o.name).ToString();
+                    var paper = (from o in db.paper_table
+                                 where o.ID == p.paperID
+                                 select o).ToArray<papers>();
+                    ndc.paper = paper[0];
                     ndc.doneCount = p.doneCount;
                     Name_doneCount.Add(ndc);
                 }
@@ -92,7 +159,7 @@ namespace AutoPaper.Controllers
                 else
                     userCookie[1] = new HttpCookie("userName", Convert.ToString(person[0].email));
                 userCookie[2] = new HttpCookie("userType", Convert.ToString(person[0].role));
-                userCookie[3] = new HttpCookie("userSubject", "Maths");
+                userCookie[3] = new HttpCookie("userSubject", "数学");
                 foreach (var cookie in userCookie)
                 {
                     cookie.Expires = DateTime.Now.AddDays(7);//7天过期
@@ -120,7 +187,7 @@ namespace AutoPaper.Controllers
             var checkKey = Request.Form["reg-confirm-email"];
             var userName = Request.Form["reg-name"];
             var userType = Request.Form["userType"];
-            if (email == null || key == null || checkKey == null || userType == null)
+            if (email == "" || key == "" || checkKey == "" || userType == "")
                 return "请输入完整注册信息！";
             else if(!Regex.IsMatch(email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
                 return "请输入正确邮箱！";
@@ -130,6 +197,11 @@ namespace AutoPaper.Controllers
                 return "两次密码不一致！";
             else
             {
+                string em = (from o in db.user_table
+                             where o.email == email
+                             select o.email).ToString();
+                if (em != null)
+                    return "该邮箱已被注册！";
                 users u = new users();
                 u.keyhash = key;
                 u.email = email;
@@ -151,25 +223,25 @@ namespace AutoPaper.Controllers
                 else
                     userCookie[1] = new HttpCookie("userName", Convert.ToString(u.email));
                 userCookie[2] = new HttpCookie("userType", Convert.ToString(u.role));
-                userCookie[3] = new HttpCookie("userSubject", "Maths");
+                userCookie[3] = new HttpCookie("userSubject", "数学");
                 return "";
             }
         }
 
-        public class hotPaper
+        public class Paper
         {
-            public string paperName;
-            public string teacher;
+            public papers paper;
+            public users teacher;
             public List<string> paperTags;
         }
-        public class hotTeacher
+        public class Teacher
         {
-            public string teacherName;
+            public users teacher;
             public List<nameADdonecount> Name_doneCount;
         }
         public class nameADdonecount
         {
-            public string paperName;
+            public papers paper;
             public int doneCount;
         }
     }

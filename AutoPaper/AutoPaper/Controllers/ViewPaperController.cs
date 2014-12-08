@@ -14,7 +14,7 @@ namespace AutoPaper.Controllers
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
-        public ActionResult Paper(int id = 0)
+        public ActionResult Paper(int id = 1)
         {
             //试卷信息
             var paperName = (from o in db.paper_table

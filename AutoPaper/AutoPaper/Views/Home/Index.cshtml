@@ -2,39 +2,38 @@
     ViewBag.Title = "卷库网-分享试卷的乐趣！";
 }
 
-<div style="width: 25%; height: 100%; float: left; color:transparent">.</div>
-<div style="position: fixed; text-align: center; width: 20%; background-color: #f7f7f7; height: auto; margin-top: 10px; ">
-    <h3 style="font-family: 微软雅黑,汉仪仿宋简; color: #32cd32; opacity: 0.75">试卷筛选</h3>
-    <hr style="margin-bottom: 0px; " />
+<div style="width: 20%; height: 100%; float: left; color:transparent">.</div>
+<div style="position: fixed; text-align: center; width: 15%; background-color: #f7f7f7; height: auto; margin-top: 10px; ">
+    <div style="background-color: #32cd32; height: 7px; width: 100%; ">.</div>
     <ul class="nav nav-pills">
-        <li><a href="#">人气高低</a></li>
-        <li><a href="#">质量评分高低</a></li>
-        <li><a href="#">难度评分高低</a></li>
-        <li><a href="#">知识结构树</a></li>
+        <li>@Html.ActionLink("热门试卷", "Index", "Home", null, new { style = "font-family:微软雅黑;" })</li>
+        <li>@Html.ActionLink("热门教师", "HotTeacher", "Home", null, new { style = "font-family:微软雅黑;" })</li>
     </ul>
+    <div style="background-color: #32cd32; height: 7px; width: 100%; ">.</div>
 </div>
 <div style="float: left; width: 75%; height: auto; padding-left: 4%">
-    <div class="hot-recommend">
-        <a id="hot-paper" class="active col-md-3" style="text-align: center; " onclick="barToPaper()">
-            <p style="font-family: 微软雅黑,汉仪仿宋简; font-size: 20px; margin-top: 10px;">热门试卷</p>
-        </a>
-        <a id="hot-teacher" class="col-md-3" style="text-align: center; " onclick="barToTeacher()">
-            <p style="font-family: 微软雅黑,汉仪仿宋简; font-size: 20px;margin-top:10px;">热门教师</p>
-        </a>
-        <div class="col-md-12"></div>
-        <div id="smartbar" class="col-md-3" style=" background-color: #32cd32; height: 4px; padding-top: 0px; margin-bottom: 0px; "></div>
-        <hr class="col-md-12" style="padding-top: 0px; margin-top: 0px;" />
-    </div>
+    @foreach (var hotpaper in ViewBag.hotPapers)
+    {
+        string paperName = @hotpaper.paper.name;
+        int paperID = @hotpaper.paper.ID;
+        <div class="homepage-show" style="background-color: #f7f7f7; padding-top: 5px; padding-bottom: 10px; padding-right: 0px; margin-bottom: 15px; ">
+            @Ajax.ActionLink("收藏", "collectPaper", "Home", new { id = @hotpaper.paper.ID }, new AjaxOptions
+                {
+                    HttpMethod = "Post",
+                    OnSuccess = "collectQuestionAlert()"
+                }, new { @class = "collect", style = "text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; " })
+            <h4>
+                @Html.ActionLink(@paperName, "Paper", "ViewPaper", new { id = @paperID }, new { style = "text-decoration:none;cursor:pointer;font-family:微软雅黑;color:#000000;" })
+            </h4>
+            <p style="color: #a4a4a4; font-family: 微软雅黑;">出卷人：<a style="font-family: 微软雅黑; text-decoration: none; cursor: pointer;">@hotpaper.teacher.name</a></p>
+            <p style="color: #a4a4a4; font-family: 微软雅黑; float: left; ">标签：</p>
+            @foreach (var tag in hotpaper.paperTags)
+            {
+                string Tag=@tag;
+                <label style="background-color: #b9b9b9; text-align: center; font-family: 微软雅黑; margin-right: 5px; padding: 2px 4px 2px 4px; ">
+                    @Html.ActionLink(@Tag, "searchResult", new { key = @Tag }, new { style = "text-decoration:none;cursor:pointer;color:#000000;" })
+                </label>
+            }
+        </div>
+    }
 </div>
-<script type="text/javascript">
-    function barToTeacher() {
-        $("#smartbar").addClass("col-md-offset-3");
-        $("#hot-paper").removeClass("active");
-        $("#hot-teacher").addClass("active");
-    }
-    function barToPaper() {
-        $("#smartbar").removeClass("col-md-offset-3");
-        $("#hot-teacher").removeClass("active");
-        $("#hot-paper").addClass("active");
-    }
-</script>

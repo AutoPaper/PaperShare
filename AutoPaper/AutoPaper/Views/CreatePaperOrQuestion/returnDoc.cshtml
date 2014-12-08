@@ -18,7 +18,7 @@
     <div style="width: 300px; height: 75px; background-color: #c1f0c1; text-align: center; margin-top: 20px; margin-left: 0px; ">
         <h2 style="font-family: 微软雅黑; padding-top: 20px; ">试  题  精  选</h2>
     </div>
-    @using(Ajax.BeginForm("getQuestion", "CreatePaperOrQuestion", new AjaxOptions
+    @using (Ajax.BeginForm("getQuestion", "CreatePaperOrQuestion", new AjaxOptions
     {
         HttpMethod = "Post",
         UpdateTargetId = "search-question",
@@ -47,27 +47,15 @@
     <div style="width: 300px; height: 75px; background-color: #fccc8a; text-align: center; margin-top: 20px; margin-right: 0px; float: right; ">
         <h2 style="font-family: 微软雅黑; ">上  传  试  卷</h2>
     </div>
-    @using (Html.BeginForm("dealwithDoc", "CreatePaperOrQuestion", FormMethod.Post, new { target = "hidden-frame", enctype = "multipart/form-data" }))
-    {
-        <div class="create-paper-col" style="height: auto; background-color: #b9b9b9; margin-top: 80px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
-            @if (ViewBag.uploadDone == "false")
-            {
-                <h3 style="font-family: 微软雅黑; margin-top: 20px; margin-bottom: 20px; float: left;">请点击下方按钮以上传您的试卷</h3>
-            }
-            else if (ViewBag.uploadDone == "true")
-            {
-                <h3 style="font-family: 微软雅黑; margin-top: 20px; margin-bottom: 20px; float: left;">
-                    试卷已成功上传，您可以去<a style="text-decoration: none; cursor: pointer;">个人中心</a>查看或继续上传试卷
-                </h3>
-            }
-        </div>
-        <div class="create-paper-col" style="height: auto; background-color: #e6e6e6; margin-bottom: 40px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; ">
-            <input type="file" id="upload-doc" name="upload-doc" class="col-md-5" style="margin-top: 40px; margin-bottom: 40px; padding-top: 5px;">
-            <button id="submit-doc" onclick="loadPaper()" type="submit" class=" col-md-2 col-md-offset-4 button button-flat-highlight" style="margin-top: 40px; margin-bottom: 20px;">确 认</button>
-            @Html.ActionLink("识别成功点击展开", "returnDoc", "CreatePaperOrQuestion", null, new { id = "ajaxDoc", @class = "button button-flat-highlight col-md-offset-2 col-md-4", style = "display:none; margin-top: 40px; margin-bottom: 20px;" })
-        </div>
-    }
-    <iframe id="hidden-frame" name="hidden-frame" style="display: none;"></iframe>
+    <div class="create-paper-col" style="height: auto; background-color: #b9b9b9; margin-top: 80px; border-top-left-radius: 10px; border-top-right-radius: 10px;">
+        <h3 style="font-family: 微软雅黑; margin-top: 20px; margin-bottom: 20px; float: left;">请点击下方按钮以上传您的试卷</h3>
+    </div>
+    <div class="create-paper-col" style="height: auto; background-color: #e6e6e6; margin-bottom: 40px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px; ">
+        <input type="file" id="upload-doc" name="upload-doc" class="col-md-5" style="margin-top: 40px; margin-bottom: 40px; padding-top: 5px;">
+        <h4 id="ajaxDoc" class="col-md-offset-2 col-md-4" style="font-family: 微软雅黑; margin-top: 40px; margin-bottom: 20px;">
+            请在下方完善试卷内容
+        </h4>
+    </div>
     <div id="upload-question">
         @Html.Partial("_uploadPartial")
     </div>
@@ -96,10 +84,4 @@
         $("#assemble-extend > img,#upload-extend > img").css("opacity", 0.3);
     }
 </script>@*选题与上传之间的切换*@
-<script type="text/javascript">
-    function loadPaper() {
-        setTimeout(function () { }, 3000);
-        $("#submit-doc").css("display", "none");
-        $("#ajaxDoc").css("display", "block");
-    }
-</script>
+

@@ -1,16 +1,19 @@
 ﻿@if (ViewBag.isUpload == "true")
 {
-    int index = -1;
-    <div style="padding-top: 0px; clear: both;">
-        @using (Ajax.BeginForm("docSave", "Home", new { id = @index }, new AjaxOptions
+    int index = ViewBag.questionList.Count;
+    <div id="1" style="padding-top: 0px; clear: both;">
+        @using (Ajax.BeginForm("docSave", "CreatePaperOrQuestion", new { uploadNum = @index }, new AjaxOptions
         {
             HttpMethod = "Post",
-            OnSuccess = "reloadUpload()"
+            OnSuccess = "reloadUpload()",
+            UpdateTargetId="1",
+            InsertionMode = InsertionMode.Replace,
         }, new { @class = "form-horizontal" }))
         {
+            index = -1;
             <div class="create-paper-col">
                 <div class="form-group">
-                    <label for="inputEmail3" class="col-sm-2 control-label">试卷名</label>
+                    <label for="paper-name" class="col-sm-2 control-label">试卷名</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" id="paper-name" name="paper-name" placeholder="您可以在此处输入试卷名">
                     </div>
@@ -71,6 +74,6 @@
 </script>
 <script type="text/javascript">
     function reloadUpload() {
-        window.location.reload();
+        window.location.href="/CreatePaperOrQuestion/Default";
     }
 </script>

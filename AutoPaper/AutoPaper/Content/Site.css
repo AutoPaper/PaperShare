@@ -38,6 +38,15 @@ textarea {
     padding-right: 15px;
 }
 
+.homepage-show {
+    position: relative;
+    float: left;
+    width: 48%;
+    margin-left: 2%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
 .question-button {
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -77,4 +86,29 @@ textarea {
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-appearance: none;
+}
+
+.collect {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -moz-transition-property: background;
+    -o-transition-property: background;
+    -webkit-transition-property: background;
+    transition-property: background;
+    -moz-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    background-color: #f18d05;
+    color: #ffffff;
+    text-shadow: none;
+    border: none;
+    cursor: pointer;
+    padding: 3px 10px 3px 10px;
+}
+
+.collect:hover, .collect:focus {
+    color: #ffffff;
+    background: #f18d05;
 }

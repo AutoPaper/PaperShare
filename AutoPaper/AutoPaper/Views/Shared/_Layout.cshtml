@@ -36,12 +36,13 @@
             <a href="/Home/Index">
                 <img class="navbar-left" style="margin-top: 6px; margin-bottom: 4px; cursor: pointer; " src="~/PicRes/logo.png" />
             </a>
-            <form class="navbar-form navbar-left" role="search">
+            @using (Html.BeginForm("searchResult", "Home", FormMethod.Post, new { @class = "navbar-form navbar-left", role = "search" }))
+            {
                 <div class="form-group" style="margin-top: 3px;">
-                    <input type="text" class="form-control " style="width: 300px;" placeholder="教师或试卷的信息" />
+                    <input name="home-search" type="text" class="form-control " style="width: 300px;" placeholder="教师或试卷的信息" />
                     <button type="submit" class="button button-flat-primary" style="margin-left: -4px;">搜 索</button>
                 </div>
-            </form>
+            }
             <div>
                 @Html.Partial("_AccountPartial")
             </div>

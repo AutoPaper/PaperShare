@@ -7,7 +7,8 @@
         @foreach (var choice_question in ViewBag.choiceQuestion)
         {
             int ID = choice_question.ID;
-            string teacherName = "孙志人";//choice_question.teacherName;
+            int citationCount = choice_question.citationCount;
+            string time = choice_question.updateTime.ToShortDateString();
             string hardness;
             int difficulty = choice_question.difficulty;
             switch (difficulty)
@@ -20,8 +21,8 @@
             <div class="create-paper-col" style="height: 35px; background-color: #e6e6e6; margin-top: 20px; margin-bottom: 0px;  ">
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">题型：选择题</p>
                 <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">难度：@hardness</p>
-                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">0</span></p>
-                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">2014/11/11 by @teacherName</p>
+                <p style="padding-top: 7px; float: left; margin-right: 25px; color: #a4a4a4; font-family: 微软雅黑;">组卷次数：<span style="color: red">@citationCount</span></p>
+                <p style="padding-top: 7px; float: right; margin-right: 0px; color: #a4a4a4; font-family: 微软雅黑;">更新时间:@time</p>
             </div>
             <div class="create-paper-col" style="margin-top: 0px; padding-top: 5px; padding-bottom: 5px; border-left: solid 1px #e6e6e6; border-right: solid 1px #e6e6e6; ">
                 @choice_question.content
