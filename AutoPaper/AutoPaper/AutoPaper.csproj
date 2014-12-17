@@ -825,6 +825,7 @@
     <Content Include="Views\CreatePaperOrQuestion\returnDoc.cshtml" />
     <Content Include="Views\Home\HotTeacher.cshtml" />
     <Content Include="Views\Home\searchResult.cshtml" />
+    <Content Include="Views\Home\HotQuestion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

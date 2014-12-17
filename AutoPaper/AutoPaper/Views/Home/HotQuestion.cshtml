@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "卷库网-分享试卷的乐趣！";
+}
+
+<div style="width: 20%; height: 100%; float: left; color:transparent">.</div>
+<div style="position: fixed; text-align: center; width: 15%; background-color: #f7f7f7; height: auto; margin-top: 10px; ">
+    <div style="background-color: #32cd32; height: 7px; width: 100%; ">.</div>
+    <ul class="nav nav-pills">
+        <li>@Html.ActionLink("热门试卷", "Index", "Home", null, new { style = "font-family:微软雅黑;" })</li>
+        <li>@Html.ActionLink("热门教师", "HotTeacher", "Home", null, new { style = "font-family:微软雅黑;" })</li>
+        <li>@Html.ActionLink("热门试题", "HotQuestion", "Home", null, new { style = "font-family:微软雅黑;" })</li>
+    </ul>
+    <div style="background-color: #32cd32; height: 7px; width: 100%; ">.</div>
+</div>

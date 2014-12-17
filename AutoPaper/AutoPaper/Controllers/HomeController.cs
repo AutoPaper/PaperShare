@@ -15,7 +15,6 @@ namespace AutoPaper.Controllers
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
-        [HttpPost]
         public ActionResult searchResult()
         {
             string key = Request.Form["home-search"];
@@ -139,6 +138,10 @@ namespace AutoPaper.Controllers
                 hotTeachers.Add(ht);
             }
             ViewBag.hotTeachers = hotTeachers;
+            return View();
+        }
+        public ActionResult HotQuestion()
+        {
             return View();
         }
 
