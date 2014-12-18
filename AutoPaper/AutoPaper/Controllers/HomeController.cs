@@ -15,12 +15,13 @@ namespace AutoPaper.Controllers
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
+        [HttpPost]
         public ActionResult searchResult()
         {
-            string key = Request.Form["home-search"];
+            string keywords = Request.Form["home-search"];
             List<Paper> matchPapers = new List<Paper>();
             var ids = (from c in db.paper_table
-                       where c.name.Contains(key)
+                       where c.name.Contains(keywords)
                        select c.ID).ToArray<int>();
             foreach (var id in ids)
             {
@@ -46,7 +47,7 @@ namespace AutoPaper.Controllers
 
             List<Teacher> matchTeachers = new List<Teacher>();
             var Ids = (from c in db.user_table
-                      where c.name.Contains(key) && c.role == 1
+                      where c.name.Contains(keywords) && c.role == 1
                       select c.ID).ToArray<int>();
             foreach (var Id in Ids)
             {
@@ -74,6 +75,10 @@ namespace AutoPaper.Controllers
                 matchTeachers.Add(ht);
             }
             ViewBag.matchTeachers = matchTeachers;
+            return View();
+        }
+        public ActionResult searchResult(string keywords)
+        {
             return View();
         }
 
