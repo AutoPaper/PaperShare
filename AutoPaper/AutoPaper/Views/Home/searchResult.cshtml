@@ -8,67 +8,77 @@
     <ul class="nav nav-pills">
         <li>@Html.ActionLink("热门试卷", "Index", "Home", null, new { style = "font-family:微软雅黑;" })</li>
         <li>@Html.ActionLink("热门教师", "HotTeacher", "Home", null, new { style = "font-family:微软雅黑;" })</li>
+        <li>@Html.ActionLink("热门试题", "HotQuestion", "Home", null, new { style = "font-family:微软雅黑;" })</li>
     </ul>
     <div style="background-color: #32cd32; height: 7px; width: 100%; ">.</div>
 </div>
 <div style="float: left; width: 75%; height: auto; padding-left: 4%">
-    @if (ViewBag.matchPapers.Count > 0)
-    {
-        <h4 class="col-md-12" style="font-family: 微软雅黑;">相关试卷</h4>
-        <hr class="col-md-12" />
-        foreach (var hotpaper in ViewBag.matchPapers)
+    @{
+        bool hasContent = false;
+        if (ViewBag.matchPapers.Count > 0)
         {
-            string paperName = @hotpaper.paper.name;
-            int paperID = @hotpaper.paper.ID;
-            <div class="homepage-show" style="background-color: #f7f7f7; padding-top: 5px; padding-bottom: 10px; padding-right: 0px; margin-bottom: 15px; ">
-                @Ajax.ActionLink("收藏", "collectPaper", "Home", new { id = @hotpaper.paper.ID }, new AjaxOptions
+            hasContent = true;
+            <h4 class="col-md-12" style="font-family: 微软雅黑;">相关试卷</h4>
+            <hr class="col-md-12" />
+            foreach (var hotpaper in ViewBag.matchPapers)
+            {
+                string paperName = @hotpaper.paper.name;
+                int paperID = @hotpaper.paper.ID;
+                <div class="homepage-show" style="background-color: #f7f7f7; padding-top: 5px; padding-bottom: 10px; padding-right: 0px; margin-bottom: 15px; ">
+                    @Ajax.ActionLink("收藏", "collectPaper", "Home", new { id = @hotpaper.paper.ID }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     OnSuccess = "collectQuestionAlert()"
                 }, new { @class = "collect", style = "text-decoration: none; float: right; margin-left: 10px; font-family: 微软雅黑; " })
-                <h4>
-                    @Html.ActionLink(@paperName, "Paper", "ViewPaper", new { id = @paperID }, new { style = "text-decoration:none;cursor:pointer;font-family:微软雅黑;color:#000000;" })
-                </h4>
-                <p style="color: #a4a4a4; font-family: 微软雅黑;">出卷人：<a style="font-family: 微软雅黑; text-decoration: none; cursor: pointer;">@hotpaper.teacher.name</a></p>
-                <p style="color: #a4a4a4; font-family: 微软雅黑; float: left; ">标签：</p>
-                @foreach (var tag in hotpaper.paperTags)
-                {
-                    string Tag = @tag;
-                    <label style="background-color: #b9b9b9; text-align: center; font-family: 微软雅黑; margin-right: 5px; padding: 2px 4px 2px 4px; ">
-                        @Html.ActionLink(@Tag, "searchResult", new { key = @Tag }, new { style = "text-decoration:none;cursor:pointer;color:#000000;" })
-                    </label>
-                }
-            </div>
+                    <h4>
+                        @Html.ActionLink(@paperName, "Paper", "ViewPaper", new { id = @paperID }, new { style = "text-decoration:none;cursor:pointer;font-family:微软雅黑;color:#000000;" })
+                    </h4>
+                    <p style="color: #a4a4a4; font-family: 微软雅黑;">出卷人：<a style="font-family: 微软雅黑; text-decoration: none; cursor: pointer;">@hotpaper.teacher.name</a></p>
+                    <p style="color: #a4a4a4; font-family: 微软雅黑; float: left; ">标签：</p>
+                    @foreach (var tag in hotpaper.paperTags)
+                    {
+                        string Tag = @tag;
+                        <label style="background-color: #b9b9b9; text-align: center; font-family: 微软雅黑; margin-right: 5px; padding: 2px 4px 2px 4px; ">
+                            @Html.ActionLink(@Tag, "searchResult", new { keywords = @Tag }, new { style = "text-decoration:none;cursor:pointer;color:#000000;" })
+                        </label>
+                    }
+                </div>
+            }
         }
-    }
-    @if (ViewBag.matchTeachers.Count > 0)
-    {
-        <h4 class="col-md-12" style="font-family: 微软雅黑; float: left;">相关教师</h4>
-        <hr class="col-md-12" />
-        foreach (var hotteacher in ViewBag.matchTeachers)
+        if (ViewBag.matchTeachers.Count > 0)
         {
-            string teacherName = @hotteacher.teacher.name;
-            int teacherID = @hotteacher.teacher.ID;
-            <div class="homepage-show" style="background-color: #f7f7f7; padding:0px 0px 10px 0px; margin-bottom: 15px; ">
-                <div style="background-color: #b9b9b9; margin-top: 0px; padding-top: 5px; padding-bottom: 5px; padding-left: 30px; margin-bottom: 10px;">
-                    @Ajax.ActionLink("关注", "collectPaper", "Home", new { }, new AjaxOptions
+            hasContent = true;
+            <h4 class="col-md-12" style="font-family: 微软雅黑; float: left;">相关教师</h4>
+            <hr class="col-md-12" />
+            foreach (var hotteacher in ViewBag.matchTeachers)
+            {
+                string teacherName = @hotteacher.teacher.name;
+                int teacherID = @hotteacher.teacher.ID;
+                <div class="homepage-show" style="background-color: #f7f7f7; padding:0px 0px 10px 0px; margin-bottom: 15px; ">
+                    <div style="background-color: #b9b9b9; margin-top: 0px; padding-top: 5px; padding-bottom: 5px; padding-left: 30px; margin-bottom: 10px;">
+                        @Ajax.ActionLink("关注", "collectPaper", "Home", new { }, new AjaxOptions
                 {
                     HttpMethod = "Post",
                     OnSuccess = "collectQuestionAlert()"
                 }, new { @class = "collect", style = "text-decoration: none; float: right; margin-top: 0px; font-family: 微软雅黑; " })
-                    <h4>
-                        @Html.ActionLink(@teacherName, "Paper", "ViewPaper", new { id = @teacherID }, new { style = "text-decoration:none;cursor:pointer;font-family:微软雅黑;color:#000000;" })
-                    </h4>
+                        <h4>
+                            @Html.ActionLink(@teacherName, "Paper", "ViewPaper", new { id = @teacherID }, new { style = "text-decoration:none;cursor:pointer;font-family:微软雅黑;color:#000000;" })
+                        </h4>
+                    </div>
+                    @foreach (var Paper in hotteacher.Name_doneCount)
+                    {
+                        string paperName = @Paper.paper.name;
+                        int paperID = @Paper.paper.ID;
+                        int doneCount = @Paper.doneCount;
+                        <p class="col-md-9">@Html.ActionLink(@paperName, "Paper", "ViewPaper", new { id = @paperID }, new { style = "margin-left:15px; color: #a4a4a4; font-family: 微软雅黑; font-size: 14px;text-decoration:none;" })</p>
+                        <p class="col-md-offset-3" style="color: #a4a4a4;">被做过<span style="color: red;">@doneCount</span>次</p>
+                    }
                 </div>
-                @foreach (var Paper in hotteacher.Name_doneCount)
-                {
-                    string paperName = @Paper.paper.name;
-                    int paperID = @Paper.paper.ID;
-                    int doneCount = @Paper.doneCount;
-                    <p class="col-md-9">@Html.ActionLink(@paperName, "Paper", "ViewPaper", new { id = @paperID }, new { style = "margin-left:15px; color: #a4a4a4; font-family: 微软雅黑; font-size: 14px;text-decoration:none;" })</p>
-                    <p class="col-md-offset-3" style="color: #a4a4a4;">被做过<span style="color: red;">@doneCount</span>次</p>
-                }
-            </div>
+            }
+        }
+        if (hasContent == false)
+        {
+            
         }
     }
 </div>

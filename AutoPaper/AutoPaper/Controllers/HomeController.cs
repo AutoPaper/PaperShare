@@ -15,10 +15,9 @@ namespace AutoPaper.Controllers
     {
         private PaperShareDBContext db = new PaperShareDBContext();
 
-        [HttpPost]
-        public ActionResult searchResult()
+        [HttpGet]
+        public ActionResult searchResult(string keywords)
         {
-            string keywords = Request.Form["home-search"];
             List<Paper> matchPapers = new List<Paper>();
             var ids = (from c in db.paper_table
                        where c.name.Contains(keywords)
@@ -75,10 +74,10 @@ namespace AutoPaper.Controllers
                 matchTeachers.Add(ht);
             }
             ViewBag.matchTeachers = matchTeachers;
-            return View();
-        }
-        public ActionResult searchResult(string keywords)
-        {
+
+            List<question> matchQuestions = new List<question>();
+
+
             return View();
         }
 
