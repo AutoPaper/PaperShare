@@ -19,42 +19,25 @@ namespace AutoPaper.Controllers
     {
         static bool uploadDone = false;
         private PaperShareDBContext db = new PaperShareDBContext();
-
         public class Question
         {
-            public int ID { get; set; }
-            public int teacherID { get; set; }
-            public string subject { get; set; }
-            public string content { get; set; }
-            public string answer { get; set; }
-            public int questionType { get; set; }
-            public int difficulty { get; set; }
-            public int citationCount { get; set; }
-            public DateTime updateTime { get; set; }
-            public string teacherName { get; set; }
+            public question qt;
+            public string teacherName;
         }
 
         public ActionResult Default()
         {
-            var t_choiceQuestion = (from a in db.question_table
-                                    join b in db.user_table
-                                    on a.teacherID equals b.ID
-                                    where a.questionType == 1 && a.citationCount != -1
-                                    orderby a.citationCount descending
-                                    select new { a, b.name }).Take(10).ToList();
+            var t_choiceQuestion = (from qt in db.question_table
+                                    join user in db.user_table
+                                    on qt.teacherID equals user.ID
+                                    where qt.questionType == 1 && qt.citationCount != -1
+                                    orderby qt.citationCount descending
+                                    select new { a = qt, user.name }).Take(10).ToList();
             List<Question> choiceQuestion = new List<Question>();
             foreach (var t_q in t_choiceQuestion)
             {
                 Question t_qestion = new Question();
-                t_qestion.ID = t_q.a.ID;
-                t_qestion.teacherID = t_q.a.teacherID;
-                t_qestion.subject = t_q.a.subject;
-                t_qestion.content = t_q.a.content;
-                t_qestion.answer = t_q.a.answer;
-                t_qestion.questionType = t_q.a.questionType;
-                t_qestion.difficulty = t_q.a.difficulty;
-                t_qestion.citationCount = t_q.a.citationCount;
-                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.qt = t_q.a;
                 t_qestion.teacherName = t_q.name;
                 choiceQuestion.Add(t_qestion);
             }
@@ -69,15 +52,7 @@ namespace AutoPaper.Controllers
             foreach (var t_q in t_blankQuestion)
             {
                 Question t_qestion = new Question();
-                t_qestion.ID = t_q.a.ID;
-                t_qestion.teacherID = t_q.a.teacherID;
-                t_qestion.subject = t_q.a.subject;
-                t_qestion.content = t_q.a.content;
-                t_qestion.answer = t_q.a.answer;
-                t_qestion.questionType = t_q.a.questionType;
-                t_qestion.difficulty = t_q.a.difficulty;
-                t_qestion.citationCount = t_q.a.citationCount;
-                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.qt = t_q.a;
                 t_qestion.teacherName = t_q.name;
                 blankQuestion.Add(t_qestion);
             }
@@ -138,7 +113,6 @@ namespace AutoPaper.Controllers
             }
             return View();
         }
-
         public ActionResult getQuestion()
         {
             string match = Request.Form["search-input"];
@@ -377,7 +351,6 @@ namespace AutoPaper.Controllers
             else
                 return "未找到答案";
         }
-
         public JsonResult findError(int id)//挑错
         {
             //获得该题上传者id
@@ -449,7 +422,6 @@ namespace AutoPaper.Controllers
             ViewBag.paperList = paperList;
             return PartialView("*******");
         }
-
         public bool addToPaper(int id)
         {
             //获得试卷name
@@ -478,7 +450,6 @@ namespace AutoPaper.Controllers
             else
                 return false;
         }
-
         public bool collectQuestion(int id)//收藏试题
         {
             int ID = Convert.ToInt32(Request.Cookies["userID"].Value);
@@ -571,7 +542,6 @@ namespace AutoPaper.Controllers
 
             //     return PartialView("_uploadPartial");
         }
-
         public bool docSave(int uploadNum)//文档保存成功
         {
             uploadDone = true;
@@ -633,7 +603,6 @@ namespace AutoPaper.Controllers
             }
             return true;
         }
-
         public ActionResult returnDoc()
         {
             var t_choiceQuestion = (from a in db.question_table

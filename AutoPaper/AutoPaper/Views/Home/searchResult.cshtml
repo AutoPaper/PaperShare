@@ -12,14 +12,14 @@
     </ul>
     <div style="background-color: #32cd32; height: 7px; width: 100%; ">.</div>
 </div>
-<div style="float: left; width: 75%; height: auto; padding-left: 4%">
+<div style="float: left; width: 75%; height: auto; padding-left: 4%; margin-top: 10px;">
     @{
         bool hasContent = false;
         if (ViewBag.matchPapers.Count > 0)
         {
             hasContent = true;
-            <h4 class="col-md-12" style="font-family: 微软雅黑;">相关试卷</h4>
-            <hr class="col-md-12" />
+            <h4 class="col-md-12" style="font-family: 微软雅黑; margin-bottom: 0px; "><em>相关试卷</em></h4>
+            <hr class="col-md-12" style="border: 0; background-color: #cccccc; height: 1px; margin-top: 12px;"/>
             foreach (var hotpaper in ViewBag.matchPapers)
             {
                 string paperName = @hotpaper.paper.name;
@@ -48,8 +48,8 @@
         if (ViewBag.matchTeachers.Count > 0)
         {
             hasContent = true;
-            <h4 class="col-md-12" style="font-family: 微软雅黑; float: left;">相关教师</h4>
-            <hr class="col-md-12" />
+            <h4 class="col-md-12" style="font-family: 微软雅黑; float: left; margin-bottom: 0px; "><em>相关教师</em></h4>
+            <hr class="col-md-12" style="border: 0; background-color: #cccccc; height: 1px; margin-top: 12px; " />
             foreach (var hotteacher in ViewBag.matchTeachers)
             {
                 string teacherName = @hotteacher.teacher.name;

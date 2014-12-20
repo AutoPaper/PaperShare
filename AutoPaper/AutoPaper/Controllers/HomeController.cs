@@ -45,19 +45,19 @@ namespace AutoPaper.Controllers
             ViewBag.matchPapers = matchPapers;
 
             List<Teacher> matchTeachers = new List<Teacher>();
-            var Ids = (from c in db.user_table
-                      where c.name.Contains(keywords) && c.role == 1
-                      select c.ID).ToArray<int>();
-            foreach (var Id in Ids)
+            ids = (from c in db.user_table
+                   where c.name.Contains(keywords) && c.role == 1
+                   select c.ID).ToArray<int>();
+            foreach (var id in ids)
             {
                 Teacher ht = new Teacher();
                 var teacher = (from o in db.user_table
-                               where o.ID == Id
+                               where o.ID == id
                                select o).ToArray<users>();
                 ht.teacher = teacher[0];
                 List<nameADdonecount> Name_doneCount = new List<nameADdonecount>();
                 var pt = from o in db.PT_table
-                         where o.teacherID == Id
+                         where o.teacherID == id
                          orderby o.doneCount descending
                          select o;
                 foreach (var p in pt)
@@ -76,7 +76,18 @@ namespace AutoPaper.Controllers
             ViewBag.matchTeachers = matchTeachers;
 
             List<question> matchQuestions = new List<question>();
+            ids = (from c in db.question_table
+                   where c.content.Contains(keywords)
+                   select c.ID).ToArray<int>();
+            foreach (var id in ids)
+            {
+                Question hq = new Question();
+                var qt = (from o in db.question_table
+                          where o.ID == id
+                          select o).ToArray<question>();
+                hq.qt = qt[0];
 
+            }
 
             return View();
         }
@@ -250,6 +261,11 @@ namespace AutoPaper.Controllers
         {
             public papers paper;
             public int doneCount;
+        }
+        public class Question
+        {
+            public question qt;
+            public string teacherName;
         }
     }
 }
