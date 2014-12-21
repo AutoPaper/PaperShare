@@ -32,73 +32,57 @@ namespace AutoPaper.Controllers
                                     on qt.teacherID equals user.ID
                                     where qt.questionType == 1 && qt.citationCount != -1
                                     orderby qt.citationCount descending
-                                    select new { a = qt, user.name }).Take(10).ToList();
+                                    select new { qt, user.name }).Take(10).ToList();
             List<Question> choiceQuestion = new List<Question>();
             foreach (var t_q in t_choiceQuestion)
             {
                 Question t_qestion = new Question();
-                t_qestion.qt = t_q.a;
+                t_qestion.qt = t_q.qt;
                 t_qestion.teacherName = t_q.name;
                 choiceQuestion.Add(t_qestion);
             }
             ViewBag.choiceQuestion = choiceQuestion;
-            var t_blankQuestion = (from a in db.question_table
-                                   join b in db.user_table
-                                   on a.teacherID equals b.ID
-                                   where a.questionType == 2 && a.citationCount != -1
-                                   orderby a.citationCount
-                                   select new { a, b.name }).Take(10).ToList();
+            var t_blankQuestion = (from qt in db.question_table
+                                   join user in db.user_table
+                                   on qt.teacherID equals user.ID
+                                   where qt.questionType == 2 && qt.citationCount != -1
+                                   orderby qt.citationCount
+                                   select new { qt, user.name }).Take(10).ToList();
             List<Question> blankQuestion = new List<Question>();
             foreach (var t_q in t_blankQuestion)
             {
                 Question t_qestion = new Question();
-                t_qestion.qt = t_q.a;
+                t_qestion.qt = t_q.qt;
                 t_qestion.teacherName = t_q.name;
                 blankQuestion.Add(t_qestion);
             }
             ViewBag.blankQuestion = blankQuestion;
-            var t_judgeQuestion = (from a in db.question_table
-                                   join b in db.user_table
-                                   on a.teacherID equals b.ID
-                                   where a.questionType == 3 && a.citationCount != -1
-                                   orderby a.citationCount
-                                   select new { a, b.name }).Take(10).ToList();
+            var t_judgeQuestion = (from qt in db.question_table
+                                   join user in db.user_table
+                                   on qt.teacherID equals user.ID
+                                   where qt.questionType == 3 && qt.citationCount != -1
+                                   orderby qt.citationCount
+                                   select new { qt, user.name }).Take(10).ToList();
             List<Question> judgeQuestion = new List<Question>();
             foreach (var t_q in t_judgeQuestion)
             {
                 Question t_qestion = new Question();
-                t_qestion.ID = t_q.a.ID;
-                t_qestion.teacherID = t_q.a.teacherID;
-                t_qestion.subject = t_q.a.subject;
-                t_qestion.content = t_q.a.content;
-                t_qestion.answer = t_q.a.answer;
-                t_qestion.questionType = t_q.a.questionType;
-                t_qestion.difficulty = t_q.a.difficulty;
-                t_qestion.citationCount = t_q.a.citationCount;
-                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.qt = t_q.qt;
                 t_qestion.teacherName = t_q.name;
                 judgeQuestion.Add(t_qestion);
             }
             ViewBag.judgeQuestion = judgeQuestion;
-            var t_integratedQuestion = (from a in db.question_table
-                                        join b in db.user_table
-                                        on a.teacherID equals b.ID
-                                        where a.questionType == 4 && a.citationCount != -1
-                                        orderby a.citationCount
-                                        select new { a, b.name }).Take(10).ToList();
+            var t_integratedQuestion = (from qt in db.question_table
+                                        join user in db.user_table
+                                        on qt.teacherID equals user.ID
+                                        where qt.questionType == 4 && qt.citationCount != -1
+                                        orderby qt.citationCount
+                                        select new { qt, user.name }).Take(10).ToList();
             List<Question> integratedQuestion = new List<Question>();
             foreach (var t_q in t_integratedQuestion)
             {
                 Question t_qestion = new Question();
-                t_qestion.ID = t_q.a.ID;
-                t_qestion.teacherID = t_q.a.teacherID;
-                t_qestion.subject = t_q.a.subject;
-                t_qestion.content = t_q.a.content;
-                t_qestion.answer = t_q.a.answer;
-                t_qestion.questionType = t_q.a.questionType;
-                t_qestion.difficulty = t_q.a.difficulty;
-                t_qestion.citationCount = t_q.a.citationCount;
-                t_qestion.updateTime = t_q.a.updateTime;
+                t_qestion.qt = t_q.qt;
                 t_qestion.teacherName = t_q.name;
                 integratedQuestion.Add(t_qestion);
             }
@@ -118,9 +102,9 @@ namespace AutoPaper.Controllers
             string match = Request.Form["search-input"];
             if (match != "")
             {
-                var t_choiceQuestion = (from a in db.question_table
-                                        join d in db.user_table
-                                        on a.teacherID equals d.ID
+                var t_choiceQuestion = (from qt in db.question_table
+                                        join user in db.user_table
+                                        on qt.teacherID equals user.ID
                                         where
                                         (from b in db.QTags_table
                                          where
@@ -128,215 +112,87 @@ namespace AutoPaper.Controllers
                                           where c.content.Contains(match)
                                           select c.ID).Contains(b.tagID)
 
-                                         select b.questionID).Contains(a.ID) && a.questionType == 1 && a.citationCount != -1
-                                        orderby a.citationCount
+                                         select b.questionID).Contains(qt.ID) && qt.questionType == 1 && qt.citationCount != -1
+                                        orderby qt.citationCount
 
-                                        select new { a, d.name }).Take(10).ToList();
+                                        select new { qt, user.name }).Take(10).ToList();
 
                 List<Question> choiceQuestion = new List<Question>();
                 foreach (var t_q in t_choiceQuestion)
                 {
                     Question t_qestion = new Question();
-                    t_qestion.ID = t_q.a.ID;
-                    t_qestion.teacherID = t_q.a.teacherID;
-                    t_qestion.subject = t_q.a.subject;
-                    t_qestion.content = t_q.a.content;
-                    t_qestion.answer = t_q.a.answer;
-                    t_qestion.questionType = t_q.a.questionType;
-                    t_qestion.difficulty = t_q.a.difficulty;
-                    t_qestion.citationCount = t_q.a.citationCount;
-                    t_qestion.updateTime = t_q.a.updateTime;
+                    t_qestion.qt = t_q.qt;
                     t_qestion.teacherName = t_q.name;
                     choiceQuestion.Add(t_qestion);
                 }
                 ViewBag.choiceQuestion = choiceQuestion;
 
-                var t_blankQuestion = (from a in db.question_table
-                                       join d in db.user_table
-                                       on a.teacherID equals d.ID
+                var t_blankQuestion = (from qt in db.question_table
+                                       join user in db.user_table
+                                       on qt.teacherID equals user.ID
                                        where
                                        (from b in db.QTags_table
                                         where
                                         (from c in db.tag_table
                                          where c.content.Contains(match)
                                          select c.ID).Contains(b.tagID)
-                                        select b.questionID).Contains(a.ID) && a.questionType == 2 && a.citationCount != -1
-                                       orderby a.citationCount
-                                       select new { a, d.name }).Take(10).ToList();
+                                        select b.questionID).Contains(qt.ID) && qt.questionType == 2 && qt.citationCount != -1
+                                       orderby qt.citationCount
+                                       select new { qt, user.name }).Take(10).ToList();
 
                 List<Question> blankQuestion = new List<Question>();
                 foreach (var t_q in t_blankQuestion)
                 {
                     Question t_qestion = new Question();
-                    t_qestion.ID = t_q.a.ID;
-                    t_qestion.teacherID = t_q.a.teacherID;
-                    t_qestion.subject = t_q.a.subject;
-                    t_qestion.content = t_q.a.content;
-                    t_qestion.answer = t_q.a.answer;
-                    t_qestion.questionType = t_q.a.questionType;
-                    t_qestion.difficulty = t_q.a.difficulty;
-                    t_qestion.citationCount = t_q.a.citationCount;
-                    t_qestion.updateTime = t_q.a.updateTime;
+                    t_qestion.qt = t_q.qt;
                     t_qestion.teacherName = t_q.name;
                     blankQuestion.Add(t_qestion);
                 }
                 ViewBag.blankQuestion = blankQuestion;
-                var t_judgeQuestion = (from a in db.question_table
-                                       join d in db.user_table
-                                       on a.teacherID equals d.ID
+                var t_judgeQuestion = (from qt in db.question_table
+                                       join user in db.user_table
+                                       on qt.teacherID equals user.ID
                                        where
                                        (from b in db.QTags_table
                                         where
                                         (from c in db.tag_table
                                          where c.content.Contains(match)
                                          select c.ID).Contains(b.tagID)
-                                        select b.questionID).Contains(a.ID) && a.questionType == 3 && a.citationCount != -1
-                                       orderby a.citationCount
-                                       select new { a, d.name }).Take(10).ToList();
+                                        select b.questionID).Contains(qt.ID) && qt.questionType == 3 && qt.citationCount != -1
+                                       orderby qt.citationCount
+                                       select new { qt, user.name }).Take(10).ToList();
 
                 List<Question> judgeQuestion = new List<Question>();
                 foreach (var t_q in t_judgeQuestion)
                 {
                     Question t_qestion = new Question();
-                    t_qestion.ID = t_q.a.ID;
-                    t_qestion.teacherID = t_q.a.teacherID;
-                    t_qestion.subject = t_q.a.subject;
-                    t_qestion.content = t_q.a.content;
-                    t_qestion.answer = t_q.a.answer;
-                    t_qestion.questionType = t_q.a.questionType;
-                    t_qestion.difficulty = t_q.a.difficulty;
-                    t_qestion.citationCount = t_q.a.citationCount;
-                    t_qestion.updateTime = t_q.a.updateTime;
+                    t_qestion.qt = t_q.qt;
                     t_qestion.teacherName = t_q.name;
                     judgeQuestion.Add(t_qestion);
                 }
                 ViewBag.judgeQuestion = judgeQuestion;
-                var t_integratedQuestion = (from a in db.question_table
-                                            join d in db.user_table
-                                            on a.teacherID equals d.ID
+                var t_integratedQuestion = (from qt in db.question_table
+                                            join user in db.user_table
+                                            on qt.teacherID equals user.ID
                                             where
                                             (from b in db.QTags_table
                                              where
                                              (from c in db.tag_table
                                               where c.content.Contains(match)
                                               select c.ID).Contains(b.tagID)
-                                             select b.questionID).Contains(a.ID) && a.questionType == 4 && a.citationCount != -1
-                                            orderby a.citationCount
-                                            select new { a, d.name }).Take(10).ToList();
+                                             select b.questionID).Contains(qt.ID) && qt.questionType == 4 && qt.citationCount != -1
+                                            orderby qt.citationCount
+                                            select new { qt, user.name }).Take(10).ToList();
 
                 List<Question> integratedQuestion = new List<Question>();
                 foreach (var t_q in t_integratedQuestion)
                 {
                     Question t_qestion = new Question();
-                    t_qestion.ID = t_q.a.ID;
-                    t_qestion.teacherID = t_q.a.teacherID;
-                    t_qestion.subject = t_q.a.subject;
-                    t_qestion.content = t_q.a.content;
-                    t_qestion.answer = t_q.a.answer;
-                    t_qestion.questionType = t_q.a.questionType;
-                    t_qestion.difficulty = t_q.a.difficulty;
-                    t_qestion.citationCount = t_q.a.citationCount;
-                    t_qestion.updateTime = t_q.a.updateTime;
+                    t_qestion.qt = t_q.qt;
                     t_qestion.teacherName = t_q.name;
                     integratedQuestion.Add(t_qestion);
                 }
                 ViewBag.integratedQuestion = integratedQuestion;
-            }
-            else
-            {
-                var t_choiceQuestion = (from a in db.question_table
-                                        join b in db.user_table
-                                        on a.teacherID equals b.ID
-                                        where a.questionType == 1 && a.citationCount != -1
-                                        orderby a.citationCount
-                                        select new { a, b.name }).Take(2).ToList();
-                List<Question> choiceQuestion = new List<Question>();
-                foreach (var t_q in t_choiceQuestion)
-                {
-                    Question t_qestion = new Question();
-                    t_qestion.ID = t_q.a.ID;
-                    t_qestion.teacherID = t_q.a.teacherID;
-                    t_qestion.subject = t_q.a.subject;
-                    t_qestion.content = t_q.a.content;
-                    t_qestion.answer = t_q.a.answer;
-                    t_qestion.questionType = t_q.a.questionType;
-                    t_qestion.difficulty = t_q.a.difficulty;
-                    t_qestion.citationCount = t_q.a.citationCount;
-                    t_qestion.updateTime = t_q.a.updateTime;
-                    t_qestion.teacherName = t_q.name;
-                    choiceQuestion.Add(t_qestion);
-                }
-                ViewBag.choiceQuestion = choiceQuestion;
-                var t_blankQuestion = (from a in db.question_table
-                                       join b in db.user_table
-                                       on a.teacherID equals b.ID
-                                       where a.questionType == 2 && a.citationCount != -1
-                                       orderby a.citationCount
-                                       select new { a, b.name }).Take(2).ToList();
-                List<Question> blankQuestion = new List<Question>();
-                foreach (var t_q in t_blankQuestion)
-                {
-                    Question t_qestion = new Question();
-                    t_qestion.ID = t_q.a.ID;
-                    t_qestion.teacherID = t_q.a.teacherID;
-                    t_qestion.subject = t_q.a.subject;
-                    t_qestion.content = t_q.a.content;
-                    t_qestion.answer = t_q.a.answer;
-                    t_qestion.questionType = t_q.a.questionType;
-                    t_qestion.difficulty = t_q.a.difficulty;
-                    t_qestion.citationCount = t_q.a.citationCount;
-                    t_qestion.updateTime = t_q.a.updateTime;
-                    t_qestion.teacherName = t_q.name;
-                    blankQuestion.Add(t_qestion);
-                }
-                ViewBag.blankQuestion = blankQuestion;
-                var t_judgeQuestion = (from a in db.question_table
-                                       join b in db.user_table
-                                       on a.teacherID equals b.ID
-                                       where a.questionType == 3 && a.citationCount != -1
-                                       orderby a.citationCount
-                                       select new { a, b.name }).Take(2).ToList();
-                List<Question> judgeQuestion = new List<Question>();
-                foreach (var t_q in t_judgeQuestion)
-                {
-                    Question t_qestion = new Question();
-                    t_qestion.ID = t_q.a.ID;
-                    t_qestion.teacherID = t_q.a.teacherID;
-                    t_qestion.subject = t_q.a.subject;
-                    t_qestion.content = t_q.a.content;
-                    t_qestion.answer = t_q.a.answer;
-                    t_qestion.questionType = t_q.a.questionType;
-                    t_qestion.difficulty = t_q.a.difficulty;
-                    t_qestion.citationCount = t_q.a.citationCount;
-                    t_qestion.updateTime = t_q.a.updateTime;
-                    t_qestion.teacherName = t_q.name;
-                    judgeQuestion.Add(t_qestion);
-                }
-                ViewBag.judgeQuestion = judgeQuestion;
-                var t_integratedQuestion = (from a in db.question_table
-                                            join b in db.user_table
-                                            on a.teacherID equals b.ID
-                                            where a.questionType == 4 && a.citationCount != -1
-                                            orderby a.citationCount
-                                            select new { a, b.name }).Take(2).ToList();
-                List<Question> integratedQuestion = new List<Question>();
-                foreach (var t_q in t_integratedQuestion)
-                {
-                    Question t_qestion = new Question();
-                    t_qestion.ID = t_q.a.ID;
-                    t_qestion.teacherID = t_q.a.teacherID;
-                    t_qestion.subject = t_q.a.subject;
-                    t_qestion.content = t_q.a.content;
-                    t_qestion.answer = t_q.a.answer;
-                    t_qestion.questionType = t_q.a.questionType;
-                    t_qestion.difficulty = t_q.a.difficulty;
-                    t_qestion.citationCount = t_q.a.citationCount;
-                    t_qestion.updateTime = t_q.a.updateTime;
-                    t_qestion.teacherName = t_q.name;
-                    integratedQuestion.Add(t_qestion);
-                }
-                ViewBag.integratedQuestion = integratedQuestion;
-
             }
             return PartialView("_searchPartial");
         }
@@ -605,98 +461,6 @@ namespace AutoPaper.Controllers
         }
         public ActionResult returnDoc()
         {
-            var t_choiceQuestion = (from a in db.question_table
-                                    join b in db.user_table
-                                    on a.teacherID equals b.ID
-                                    where a.questionType == 1 && a.citationCount != -1
-                                    orderby a.citationCount
-                                    select new { a, b.name }).Take(2).ToList();
-            List<Question> choiceQuestion = new List<Question>();
-            foreach (var t_q in t_choiceQuestion)
-            {
-                Question t_qestion = new Question();
-                t_qestion.ID = t_q.a.ID;
-                t_qestion.teacherID = t_q.a.teacherID;
-                t_qestion.subject = t_q.a.subject;
-                t_qestion.content = t_q.a.content;
-                t_qestion.answer = t_q.a.answer;
-                t_qestion.questionType = t_q.a.questionType;
-                t_qestion.difficulty = t_q.a.difficulty;
-                t_qestion.citationCount = t_q.a.citationCount;
-                t_qestion.updateTime = t_q.a.updateTime;
-                t_qestion.teacherName = t_q.name;
-                choiceQuestion.Add(t_qestion);
-            }
-            ViewBag.choiceQuestion = choiceQuestion;
-            var t_blankQuestion = (from a in db.question_table
-                                   join b in db.user_table
-                                   on a.teacherID equals b.ID
-                                   where a.questionType == 2 && a.citationCount != -1
-                                   orderby a.citationCount
-                                   select new { a, b.name }).Take(2).ToList();
-            List<Question> blankQuestion = new List<Question>();
-            foreach (var t_q in t_blankQuestion)
-            {
-                Question t_qestion = new Question();
-                t_qestion.ID = t_q.a.ID;
-                t_qestion.teacherID = t_q.a.teacherID;
-                t_qestion.subject = t_q.a.subject;
-                t_qestion.content = t_q.a.content;
-                t_qestion.answer = t_q.a.answer;
-                t_qestion.questionType = t_q.a.questionType;
-                t_qestion.difficulty = t_q.a.difficulty;
-                t_qestion.citationCount = t_q.a.citationCount;
-                t_qestion.updateTime = t_q.a.updateTime;
-                t_qestion.teacherName = t_q.name;
-                blankQuestion.Add(t_qestion);
-            }
-            ViewBag.blankQuestion = blankQuestion;
-            var t_judgeQuestion = (from a in db.question_table
-                                   join b in db.user_table
-                                   on a.teacherID equals b.ID
-                                   where a.questionType == 3 && a.citationCount != -1
-                                   orderby a.citationCount
-                                   select new { a, b.name }).Take(2).ToList();
-            List<Question> judgeQuestion = new List<Question>();
-            foreach (var t_q in t_judgeQuestion)
-            {
-                Question t_qestion = new Question();
-                t_qestion.ID = t_q.a.ID;
-                t_qestion.teacherID = t_q.a.teacherID;
-                t_qestion.subject = t_q.a.subject;
-                t_qestion.content = t_q.a.content;
-                t_qestion.answer = t_q.a.answer;
-                t_qestion.questionType = t_q.a.questionType;
-                t_qestion.difficulty = t_q.a.difficulty;
-                t_qestion.citationCount = t_q.a.citationCount;
-                t_qestion.updateTime = t_q.a.updateTime;
-                t_qestion.teacherName = t_q.name;
-                judgeQuestion.Add(t_qestion);
-            }
-            ViewBag.judgeQuestion = judgeQuestion;
-            var t_integratedQuestion = (from a in db.question_table
-                                        join b in db.user_table
-                                        on a.teacherID equals b.ID
-                                        where a.questionType == 4 && a.citationCount != -1
-                                        orderby a.citationCount
-                                        select new { a, b.name }).Take(2).ToList();
-            List<Question> integratedQuestion = new List<Question>();
-            foreach (var t_q in t_integratedQuestion)
-            {
-                Question t_qestion = new Question();
-                t_qestion.ID = t_q.a.ID;
-                t_qestion.teacherID = t_q.a.teacherID;
-                t_qestion.subject = t_q.a.subject;
-                t_qestion.content = t_q.a.content;
-                t_qestion.answer = t_q.a.answer;
-                t_qestion.questionType = t_q.a.questionType;
-                t_qestion.difficulty = t_q.a.difficulty;
-                t_qestion.citationCount = t_q.a.citationCount;
-                t_qestion.updateTime = t_q.a.updateTime;
-                t_qestion.teacherName = t_q.name;
-                integratedQuestion.Add(t_qestion);
-            }
-            ViewBag.integratedQuestion = integratedQuestion;
             ViewBag.uploadDone = "false";
             int ID = Convert.ToInt32(Request.Cookies["userID"].Value);
             var questionList = (from o in db.question_table
