@@ -180,7 +180,7 @@ namespace AutoPaper.Controllers
                 userCookie[3] = new HttpCookie("userSubject", "数学");
                 foreach (var cookie in userCookie)
                 {
-                    cookie.Expires = DateTime.Now.AddDays(7);//7天过期
+                    cookie.Expires = DateTime.Now.AddDays(3);//3天过期
                     Response.Cookies.Add(cookie);
                 }
                 if (Session["nextActionName"] != null)
